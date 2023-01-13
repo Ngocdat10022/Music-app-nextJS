@@ -18,3 +18,20 @@ export const getDataHome = async (page: number) => {
   const dataHome = await api.get(`home?page=${page}`);
   return dataHome.data;
 };
+export const getPlayListDetailt = async (idPlayList: string) => {
+  const dataPlayListDetailt = await api.get(`detailplaylist?id=${idPlayList}`);
+  return dataPlayListDetailt.data;
+};
+export const getEncodeId = async () => {
+  const data = await getDataHome(1);
+  // const dataBannerHome = data?.data?.items[0].items;
+  const dataMusicSpring = data?.data.items[2].items;
+  return dataMusicSpring.map((item: any) => {
+    return {
+      params: {
+        detailPlayList: `${item?.encodeId.toString()}`,
+      },
+    };
+  });
+};
+4;

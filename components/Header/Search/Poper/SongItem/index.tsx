@@ -1,8 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
 import React, { useContext } from "react";
-import { MusicContext } from "../../../../context/MusicContext";
-import { setCookiesSongId } from "../../../../utils/musicCookie";
+import { MusicContext } from "../../../../../context/MusicContext";
+import { setCookiesSongId } from "../../../../../utils/musicCookie";
 
 const MusicItem = ({ song }: { song: any }) => {
   const { setEncodeId, setAutoPlay, linkPlay, autoPlay } =

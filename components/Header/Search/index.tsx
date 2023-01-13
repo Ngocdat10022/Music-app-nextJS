@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import HeadlessTippy from "@tippyjs/react/headless";
 import PoperWrapper from "./Poper";
 import Searchresult from "./SearchResult";
-import ArtisItem from "./ArtistItem";
+import ArtisItem from "./Poper/ArtistItem";
 import useToggleValue from "../../../hooks/useToggleValue";
 import { getSearch } from "../../../service/api";
 import UseDebounce from "../../../hooks/useDebounce";

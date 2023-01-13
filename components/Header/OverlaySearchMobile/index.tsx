@@ -3,7 +3,7 @@ import Close from "../../../assets/Icons/Close";
 import { MusicContext } from "../../../context/MusicContext";
 import UseDebounce from "../../../hooks/useDebounce";
 import { getSearch } from "../../../service/api";
-import MusicItem from "../Search/MusicItem";
+import MusicItem from "../Search/Poper/SongItem";
 interface Props {
   showSearchMobile: boolean;
 }

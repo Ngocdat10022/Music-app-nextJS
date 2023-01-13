@@ -1,11 +1,14 @@
 import Head from "next/head";
-import React, { useContext, useEffect } from "react";
+import React, { lazy, useContext, useEffect } from "react";
 import { MusicContext, MusicContextProvider } from "../../context/MusicContext";
 import { getInfoSong, getTheSong } from "../../service/api";
 import { getCookiesSongId } from "../../utils/musicCookie";
 import Header from "../Header";
 import PlayMusic from "../PlayMusic";
 import SiderBar from "../SiderBar";
+// const Header = lazy(() => import("../Header"));
+// const PlayMusic = lazy(() => import("../PlayMusic"));
+// const SiderBar = lazy(() => import("../SiderBar"));
 interface Props {
   children?: React.ReactNode;
 }
@@ -60,7 +63,7 @@ const Layout = ({ children }: Props) => {
       </Head>
       <SiderBar></SiderBar>
       <Header></Header>
-      <div className=" h-[200vh] ml-[240px] mt-[70px] mb-[89px] px-[60px] width max-lg:ml-[70px]">
+      <div className=" h-[200vh] ml-[240px] mt-[70px] mb-[89px] px-[60px] max-w-[100%] max-lg:ml-[70px]">
         {children}
       </div>
       <PlayMusic></PlayMusic>

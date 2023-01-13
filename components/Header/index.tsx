@@ -23,11 +23,6 @@ const Header = () => {
       isHide: false,
     },
     {
-      titleTooltip: "Nâng cấp vip",
-      icon: <Shirt />,
-      isHide: false,
-    },
-    {
       titleTooltip: "Tải lên",
       icon: <Upload />,
       isHide: true,

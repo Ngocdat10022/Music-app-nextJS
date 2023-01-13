@@ -1,5 +1,5 @@
 import React from "react";
-import MusicItem from "../MusicItem";
+import MusicItem from "../Poper/SongItem";
 
 const Searchresult = ({ data }: { data: any }) => {
   return (

@@ -16,7 +16,7 @@ const CardSiderBar = ({
 }) => {
   return (
     <div
-      className={`max-lg:hidden lg:block flex flex-col items-center px-2 py-4 mx-5 mb-2 rounded-xl login-nav-container ${bg}`}
+      className={`max-lg:hidden lg:flex flex flex-col items-center justify-center px-2 py-4 mx-5 mb-2 rounded-xl login-nav-container ${bg}`}
     >
       <div className="w-full text-[12px] font-bold text-center">{children}</div>
       <ButtonCard border={border} bg={bgBtn}>

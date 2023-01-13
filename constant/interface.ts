@@ -52,6 +52,30 @@ export interface IDataBanner {
   title: string;
   type: number;
 }
+export interface IDataMusicSpring {
+  PR: boolean;
+  artists: [];
+  artistsNames: string;
+  encodeId: string;
+  genreIds: string[];
+  isAlbum: boolean;
+  isIndie: boolean;
+  isPrivate: boolean;
+  isShuffle: boolean;
+  isSingle: boolean;
+  isoffical: boolean;
+  link: string;
+  playItemMode: number;
+  releaseDate: string;
+  sortDescription: string;
+  subType: number;
+  textType: string;
+  thumbnail: string;
+  thumbnailM: string;
+  title: string;
+  uid: number;
+  userName: string;
+}
 export interface IInfoSong {
   title: string;
   nameArtists: string;

@@ -112,5 +112,21 @@
   .animation-search-mobile {
     transition: all 0.5s;
   }
+  .wrapper-img-music-item:hover img {
+    transform: scale(1.2);
+    cursor: pointer;
+    transition: all 0.5s;
+  }
+  .wrapper-img-music-item:hover div {
+    display: flex;
+  }
+  .music-item-des {
+    overflow: hidden;
+    display: block;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    text-overflow: ellipsis;
+  }
 }
 //0,0%,100%,0.1
