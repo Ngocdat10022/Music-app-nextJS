@@ -27,9 +27,9 @@ export const getPlayListDetailt = async (idPlayList: string) => {
   return dataPlayListDetailt.data;
 };
 export const getEncodeId = async () => {
-  const data = await getDataHome(1);
-  const dataTop100 = await getTop100();
-
+  // const data = await getDataHome(1);
+  // const dataTop100 = await getTop100();
+  const [data, dataTop100] = await Promise.all([getDataHome(1), getTop100()]);
   // const dataBannerHome = data?.data?.items[0].items;
   const dataOutstanding = dataTop100.data[0]?.items;
   const dataVietNamese = dataTop100.data[1]?.items;

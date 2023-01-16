@@ -60,7 +60,7 @@ const NAV_TWO: Nav[] = [
   {
     title: "Mv",
     icon: <Mv />,
-    to: "/",
+    to: "Mv",
   },
 ];
 const SiderBar = () => {

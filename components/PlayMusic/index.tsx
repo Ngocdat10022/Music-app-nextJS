@@ -1,8 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useContext } from "react";
-import AudioPlayer from "react-h5-audio-player";
-import "react-h5-audio-player/lib/styles.css";
+import React, { useContext, memo } from "react";
+
 import { MusicContext } from "../../context/MusicContext";
+import Audio from "./Audio";
 const PlayMusic = () => {
   const { linkPlay, autoPlay, infoSong } = useContext(MusicContext);
   const info = infoSong[0];
@@ -19,19 +19,7 @@ const PlayMusic = () => {
           <span className="text-[12px] text-text2">{info?.nameArtists}</span>
         </div>
       </div>
-      <AudioPlayer
-        style={{
-          flex: 1,
-          background: "rgb(23 15 35 / var(--tw-bg-opacity)",
-          height: "100%",
-          // width: "500px",
-        }}
-        autoPlay={autoPlay}
-        src={linkPlay}
-        onPlay={() => console.log("autoPlay")}
-        // other props here
-      />
-
+      <Audio linkPlay={linkPlay} autoPlay={autoPlay} />
       {/* <AudioPlayer
         style={{
           height: "100%",
@@ -45,4 +33,4 @@ const PlayMusic = () => {
   );
 };
 
-export default PlayMusic;
+export default memo(PlayMusic);
