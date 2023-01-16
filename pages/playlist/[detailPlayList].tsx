@@ -41,7 +41,7 @@ const DetailPlayList = ({ data }: { data: any }) => {
               />
             </div>
           </div>
-          <div className="flex flex-col max-md:hidden items-center w-[30%] gap-2">
+          <div className="flex flex-col max-md:hidden items-center  w-[30%] gap-2">
             <div className="w-full h-full overflow-hidden rounded-lg">
               <img
                 className="w-full h-full "
@@ -67,13 +67,19 @@ const DetailPlayList = ({ data }: { data: any }) => {
             <div className="mt-5">
               <div className="flex items-center justify-between w-full text-xs header text-text2">
                 <div className="media-left w-[50%]">BÀI HÁT</div>
-                <div className="media-content">ALBUM</div>
-                <div className="media-right">THỜI GIAN</div>
+                <div className="media-content max-sm:hidden">ALBUM</div>
+                <div className="media-right max-sm:hidden">THỜI GIAN</div>
               </div>
               <div className="flex flex-col scroll-bar">
                 {dataSongs.length > 0 &&
-                  dataSongs.map((song) => {
-                    return <SongItem key={song.encodeId} song={song} />;
+                  dataSongs.map((song, index) => {
+                    return (
+                      <SongItem
+                        key={song.encodeId}
+                        song={song}
+                        index={index + 1}
+                      />
+                    );
                   })}
               </div>
             </div>
@@ -81,7 +87,7 @@ const DetailPlayList = ({ data }: { data: any }) => {
         </div>
         <div>
           {dataArtist && <Title>Nghệ Sĩ Tham Gia</Title>}
-          <div className="grid w-full grid-cols-5 gap-4 mx-auto mt-5">
+          <div className="grid w-full grid-cols-5 gap-4 mx-auto mt-5 max-md:grid-cols-2 max-lg:grid-cols-4">
             {dataArtist &&
               dataArtist.length > 0 &&
               dataArtist.map((artists) => {

@@ -36,7 +36,7 @@ const SearchMobile = ({ showSearchMobile = false }: Props) => {
         )}
         {songs.length > 0 &&
           songs.map((song: any) => {
-            return <MusicItem key={song.alias} song={song} />;
+            return <MusicItem key={song?.encodeId} song={song} />;
           })}
       </div>
     </div>
