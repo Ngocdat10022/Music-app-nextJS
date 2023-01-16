@@ -7,7 +7,7 @@ interface PropsBannerItem {
 const BannerItem = ({ banner }: PropsBannerItem) => {
   return (
     <div className="overflow-hidden rounded-2xl">
-      <Link href="/playlist/123">
+      <Link href={`/playlist/${banner?.encodeId}`}>
         <img
           width="100%"
           height="100%"

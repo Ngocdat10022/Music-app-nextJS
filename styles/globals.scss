@@ -2,6 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 @import url("https://fonts.googleapis.com/css2?family=Dongle:wght@300;400;700&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Manrope:wght@200;300;400;500;600;700;800&family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&family=Poppins:ital,wght@1,400;1,500;1,600&display=swap");
+
+@layer utilities {
+  .scroll-bar::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+  }
+
+  /* Track */
+  .scroll-bar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  /* Handle */
+  .scroll-bar::-webkit-scrollbar-thumb {
+    background: transparent;
+  }
+
+  /* Handle on hover */
+  .scroll-bar::-webkit-scrollbar-thumb:hover {
+    background: transparent;
+  }
+}
+
 @layer base {
   * {
     box-sizing: border-box;
@@ -128,5 +151,28 @@
     -webkit-line-clamp: 2;
     text-overflow: ellipsis;
   }
+
+  /* 
+    Meida style 
+  */
+  .media-left {
+    width: 50%;
+  }
+  .media-content {
+    flex-basis: auto;
+    flex-grow: 1;
+    flex-shrink: 1;
+    text-align: left;
+    align-self: center;
+  }
+  .media-right {
+    flex-basis: auto;
+    flex-grow: 0;
+    flex-shrink: 0;
+  }
+
+  /*custom scroll-bar detailPlayList*/
+  /* width */
 }
+
 //0,0%,100%,0.1

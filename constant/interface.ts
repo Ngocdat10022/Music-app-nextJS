@@ -28,6 +28,9 @@ export interface IMsuicSongs {
   username: string;
   zingChoice: boolean;
 }
+export interface ISongDetailPlayList extends IMsuicSongs {
+  alias: string;
+}
 export interface IMusicArtist {
   alias: string;
   id: string;
@@ -76,6 +79,16 @@ export interface IDataMusicSpring {
   uid: number;
   userName: string;
 }
+export interface IArtistsTrending {
+  artists: {}[];
+  artistsNames: string;
+  encodeId: string;
+  link: string;
+  sortDescription: string;
+  thumbnail: string;
+  thumbnailM: string;
+  title: string;
+}
 export interface IInfoSong {
   title: string;
   nameArtists: string;
@@ -86,3 +99,9 @@ export type infoSong = {
   nameArtists: string;
   urlImage: string;
 };
+
+export interface IDataNewRelease {
+  all: ISongDetailPlayList[];
+  others: ISongDetailPlayList[];
+  vPop: ISongDetailPlayList[];
+}

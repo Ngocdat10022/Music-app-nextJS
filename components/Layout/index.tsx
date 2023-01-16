@@ -63,7 +63,7 @@ const Layout = ({ children }: Props) => {
       </Head>
       <SiderBar></SiderBar>
       <Header></Header>
-      <div className=" h-[200vh] ml-[240px] mt-[70px] mb-[89px] px-[60px] max-w-[100%] max-lg:ml-[70px]">
+      <div className=" h-[100% - 89px] ml-[240px] mt-[70px] mb-[89px] px-[60px] max-w-[100%] max-lg:ml-[70px] max-sm:px-[20px] scroll-bar">
         {children}
       </div>
       <PlayMusic></PlayMusic>

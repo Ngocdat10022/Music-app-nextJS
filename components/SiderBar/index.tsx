@@ -55,7 +55,7 @@ const NAV_TWO: Nav[] = [
   {
     title: "Top100",
     icon: <Star />,
-    to: "/",
+    to: "/Top100",
   },
   {
     title: "Mv",
@@ -134,7 +134,7 @@ const SiderBar = () => {
                   return (
                     <li key={item.title}>
                       <Link
-                        href="/"
+                        href={`${item.to}`}
                         className="flex items-center gap-3 px-6 py-2 text-[12px] font-bold text-text1 hover:text-white"
                       >
                         <span>{item.icon}</span>

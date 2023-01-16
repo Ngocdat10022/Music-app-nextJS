@@ -1,14 +1,17 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
 import React, { useContext } from "react";
-import HeartIcon from "../../../assets/Icons/HeartIcon";
-import List from "../../../assets/Icons/List";
-import PlayIcon from "../../../assets/Icons/PlayIcon";
-const MusicItem = ({ item }: { item: any }) => {
+import HeartIcon from "../../assets/Icons/HeartIcon";
+import List from "../../assets/Icons/List";
+import PlayIcon from "../../assets/Icons/PlayIcon";
+const CardItem = ({ item }: { item: any }) => {
   return (
-    <div key={item.uid} className="flex flex-col gap-3">
+    <div
+      key={item.uid}
+      className="flex flex-col items-start justify-between gap-3"
+    >
       <Link href={`/playlist/${item.encodeId}`}>
-        <div className="relative w-[214px] h-[214px] overflow-hidden rounded-md wrapper-img-music-item">
+        <div className="relative w-full h-[214px] lg:[h-150px] max-xl:[h-150px] max-maxsm:h-[120px]  max-sm:h-[150px] overflow-hidden rounded-md wrapper-img-music-item">
           <img
             className="w-full h-full "
             src={`${item?.thumbnailM}`}
@@ -30,11 +33,11 @@ const MusicItem = ({ item }: { item: any }) => {
           {item?.title}
         </h3>
       </Link>
-      <p className="text-sm pointer-events-none music-item-des text-start text-text1">
+      <p className="text-sm pointer-events-none music-item-des text-start text-text1 max-sm:hidden">
         {item?.sortDescription}
       </p>
     </div>
   );
 };
 
-export default MusicItem;
+export default CardItem;

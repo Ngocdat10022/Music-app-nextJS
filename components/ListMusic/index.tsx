@@ -1,7 +1,11 @@
 import React from "react";
 
-const ListMusic = ({ children }: { children: React.ReactNode }) => {
-  return <div className="grid w-full grid-cols-5 gap-5 mt-5">{children}</div>;
+const List = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <div className="grid w-full grid-cols-5 gap-5 mt-5 max-xl:grid-cols-4 max-lg:grid-cols-3 max-md:grid-cols-2 ">
+      {children}
+    </div>
+  );
 };
 
-export default ListMusic;
+export default List;

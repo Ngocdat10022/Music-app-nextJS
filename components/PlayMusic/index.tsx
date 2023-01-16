@@ -8,7 +8,7 @@ const PlayMusic = () => {
   const info = infoSong[0];
   return (
     <div className="fixed flex items-center justify-center gap-2 bottom-0 inset-x-0 bg-colorPlayMusic border-solid border-t-borderT border-t-[1px]  h-[89px]">
-      <div className="flex items-center justify-center gap-4 w-[20%] ">
+      <div className="flex items-center max-lg:w-[30%] justify-center gap-4 w-[20%] ">
         <img
           className="w-[50px] h-[50px] rounded-full"
           src={`${info?.urlImage}`}
