@@ -11,8 +11,8 @@ interface IVideoContext {
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
   listVideo: IVideoItem[];
   setListVideo: React.Dispatch<React.SetStateAction<IVideoItem[]>>;
-  pageIndex: number;
-  setPageIndex: React.Dispatch<React.SetStateAction<number>>;
+  linitIndex: number;
+  setLimitIndex: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const valueVideoContext = {
@@ -20,8 +20,8 @@ const valueVideoContext = {
   setLoading: () => {},
   listVideo: [],
   setListVideo: () => {},
-  pageIndex: 1,
-  setPageIndex: () => {},
+  linitIndex: 20,
+  setLimitIndex: () => {},
 };
 
 export const VideoContext = createContext<IVideoContext>(valueVideoContext);
@@ -29,18 +29,17 @@ export const VideoContext = createContext<IVideoContext>(valueVideoContext);
 export const VideoContextProvider = ({ children }: IPropVideoContext) => {
   const [listVideo, setListVideo] = useState<IVideoItem[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
-  const [pageIndex, setPageIndex] = useState<number>(1);
-  console.log("listVideo", listVideo);
+  const [linitIndex, setLimitIndex] = useState<number>(20);
   useEffect(() => {
     (async () => {
       try {
-        const dataListVideo = await getlistMV("IWZ9Z08I", pageIndex, 20);
+        const dataListVideo = await getlistMV("IWZ9Z08I", 1, linitIndex);
         setListVideo(dataListVideo?.data?.items);
       } catch (error) {
         console.log("error", error);
       }
     })();
-  }, [pageIndex]);
+  }, [linitIndex]);
   return (
     <VideoContext.Provider
       value={{
@@ -48,8 +47,8 @@ export const VideoContextProvider = ({ children }: IPropVideoContext) => {
         loading,
         setLoading,
         setListVideo,
-        pageIndex,
-        setPageIndex,
+        linitIndex,
+        setLimitIndex,
       }}
     >
       {children}

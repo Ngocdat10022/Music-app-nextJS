@@ -41,8 +41,6 @@ export default function Home({
   const [newDayMusic, setNewDayMusic] =
     useState<IDataMusicSpring[]>(dataNewDayMusic);
   const [conner, setConner] = useState<IDataMusicSpring[]>(dataConner);
-  console.log("dataHome", dataHome);
-
   return (
     <div className="app">
       <HomeContext.Provider

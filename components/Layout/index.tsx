@@ -34,7 +34,7 @@ const Layout = ({ children }: Props) => {
             if (dataSong.data.data && dataInfoSong.data) {
               // console.log("dataSong", dataSong.data.data["128"]);
               setLinkPlay(dataSong.data.data["128"]);
-              setAutoPlay(true);
+              setAutoPlay(false);
               const title =
                 dataInfoSong.data?.title || dataInfoSong.data.album?.title;
               const nameArtists = dataInfoSong.data?.artistsNames;

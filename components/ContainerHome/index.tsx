@@ -10,9 +10,9 @@ const ContainerHome = () => {
   const { musicSpring, newRelease, artistsTrending, newDayMusic, conner } =
     useContext(HomeContext);
   const dataNewRelease = newRelease[0];
-  const dataNewReleaseAll = dataNewRelease.all;
-  const dataNewReleaseOrthers = dataNewRelease.others;
-  const dataNewReleaseVpop = dataNewRelease.vPop;
+  const dataNewReleaseAll = dataNewRelease?.all;
+  const dataNewReleaseOrthers = dataNewRelease?.others;
+  const dataNewReleaseVpop = dataNewRelease?.vPop;
   // console.log("dataNewReleaseAll", dataNewReleaseAll);
   // console.log("dataNewReleaseOrthers", dataNewReleaseOrthers);
   // console.log("dataNewReleaseVpop", dataNewReleaseVpop);

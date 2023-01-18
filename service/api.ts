@@ -50,7 +50,23 @@ export const getDetailVideo = async (id: string) => {
     console.log("error", error);
   }
 };
+export const getCategoryVideo = async (id: string) => {
+  try {
+    const data = await api.get(`categorymv?id=${id}`);
+    return data;
+  } catch (error) {
+    console.log("error", error);
+  }
+};
 
+export const getMusicChart = async () => {
+  try {
+    const data = await api.get(`newreleasechart`);
+    return data.data;
+  } catch (error) {
+    console.log("error", error);
+  }
+};
 export const getEncodeId = async () => {
   // const data = await getDataHome(1);
   // const dataTop100 = await getTop100();

@@ -28,6 +28,11 @@ export interface IMsuicSongs {
   username: string;
   zingChoice: boolean;
 }
+export interface IMusicChartNewRealesa extends IMsuicSongs {
+  alias: string;
+  rakingStatus: number;
+  releasedAt: number;
+}
 export interface ISongDetailPlayList extends IMsuicSongs {
   alias: string;
 }
