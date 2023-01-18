@@ -26,6 +26,31 @@ export const getPlayListDetailt = async (idPlayList: string) => {
   const dataPlayListDetailt = await api.get(`detailplaylist?id=${idPlayList}`);
   return dataPlayListDetailt.data;
 };
+
+export const getlistMV = async (id: string, page: number, count: number) => {
+  try {
+    const dataListMv = await api.get("listmv", {
+      params: {
+        id: id,
+        page: page,
+        count: count,
+      },
+    });
+    return dataListMv.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const getDetailVideo = async (id: string) => {
+  try {
+    const data = await api.get(`video?id=${id}`);
+    return data.data;
+  } catch (error) {
+    console.log("error", error);
+  }
+};
+
 export const getEncodeId = async () => {
   // const data = await getDataHome(1);
   // const dataTop100 = await getTop100();

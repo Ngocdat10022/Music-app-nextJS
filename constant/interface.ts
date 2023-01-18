@@ -105,3 +105,22 @@ export interface IDataNewRelease {
   others: ISongDetailPlayList[];
   vPop: ISongDetailPlayList[];
 }
+
+export interface IVideoItem {
+  alias: string;
+  artist: {};
+  artists: {}[];
+  artistsNames: string;
+  duration: number;
+  encodeId: string;
+  isOffical: boolean;
+  isWorldWide: boolean;
+  link: string;
+  streamingStatus: number;
+  thumbnail: string;
+  thumbnailM: string;
+  title: string;
+  username: string;
+}
+
+export interface IVideoDetail {}
