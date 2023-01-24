@@ -42,6 +42,25 @@ export const getlistMV = async (id: string, page: number, count: number) => {
   }
 };
 
+export const getArtistSong = async (
+  id: string,
+  page: number,
+  count: number
+) => {
+  try {
+    const dataArtistSong = await api.get(`artistsong?name=`, {
+      params: {
+        id: id,
+        page: page,
+        count: count,
+      },
+    });
+    return dataArtistSong.data;
+  } catch (error) {
+    console.log("error", error);
+  }
+};
+
 export const getDetailVideo = async (id: string) => {
   try {
     const data = await api.get(`video?id=${id}`);
@@ -82,6 +101,7 @@ export const getEncodeId = async () => {
   const dataArtistsTrending = data?.data.items[5].items;
   const dataNewDayMusic = data?.data.items[7].items;
   const dataConner = data?.data.items[13].items;
+  const dataBanner = data?.data?.items[0].items;
   const allData = [
     ...dataMusicSpring,
     ...dataArtistsTrending,
@@ -92,6 +112,7 @@ export const getEncodeId = async () => {
     ...dataAsia,
     ...dataUsUk,
     ...dataSymphony,
+    ...dataBanner,
   ];
   return allData.map((item: any) => {
     return {

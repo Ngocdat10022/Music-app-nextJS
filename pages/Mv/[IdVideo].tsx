@@ -44,6 +44,7 @@ const IdVideo = () => {
     (async () => {
       try {
         const dataDetailVideo = await getDetailVideo(`${id}`);
+        console.log("dataDetailVideo", dataDetailVideo);
         setLinkVideo(dataDetailVideo.data.streaming.mp4[quality]);
         setRecommends(dataDetailVideo.data.recommends);
         setInfo({

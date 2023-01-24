@@ -9,7 +9,10 @@ const ArtisItem = ({ data }: Props) => {
   const alias = data?.alias.split("-");
   return (
     <div className="p-2 rounded-xl hover-bg">
-      <Link href="/" className="flex items-center gap-4">
+      <Link
+        href={`/artistSong/${data?.id}`}
+        className="flex items-center gap-4"
+      >
         <div className="w-[40px h-[40px] overflow-hidden rounded-full">
           <img
             className="w-full h-full"

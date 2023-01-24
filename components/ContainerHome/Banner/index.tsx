@@ -3,6 +3,7 @@ import { HomeContext } from "../../../context/HomeContext";
 import BannerItem from "./BannerItem";
 const Banner = () => {
   const { dataBanner } = useContext(HomeContext);
+  console.log("dataBanner", dataBanner);
   return (
     <div className="grid grid-cols-3 gap-5 max-lg:grid-cols-2">
       {/* <Slider {...settings}> */}
