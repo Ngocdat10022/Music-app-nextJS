@@ -11,6 +11,7 @@ import {
   IDataNewRelease,
 } from "../constant/interface";
 import { getDataHome } from "../service/api";
+import Toast from "../components/Toast";
 const inter = Inter({ subsets: ["latin"] });
 interface Props {
   dataBannerHome: IDataBanner[];
@@ -57,6 +58,7 @@ export default function Home({
         <MusicContextProvider>
           <Layout>
             <ContainerHome />
+            <Toast />
           </Layout>
         </MusicContextProvider>
         {/* <PlayMusic /> */}

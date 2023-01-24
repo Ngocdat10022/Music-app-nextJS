@@ -9,6 +9,7 @@ import ReleaseDate from "../../components/DetailPlayList/ReleaseDate";
 import SongItem from "../../components/DetailPlayList/Song";
 import TitleDetail from "../../components/DetailPlayList/TitleDetail";
 import Title from "../../components/Title";
+import Toast from "../../components/Toast";
 import { IMusicArtist, ISongDetailPlayList } from "../../constant/interface";
 const Layout = lazy(() => import("../../components/Layout"));
 import { MusicContextProvider } from "../../context/MusicContext";
@@ -95,6 +96,7 @@ const DetailPlayList = ({ data }: { data: any }) => {
               })}
           </div>
         </div>
+        <Toast />
       </Layout>
     </MusicContextProvider>
   );

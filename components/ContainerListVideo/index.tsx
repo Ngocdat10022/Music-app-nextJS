@@ -23,7 +23,7 @@ const ContainerListVideo = () => {
           onClick={handleSetLimit}
           className="px-3 py-2 rounded-md active:text-primary active:bg-text1 bg-primary"
         >
-          See more
+          Xem thêm
         </button>
       </div>
     </div>

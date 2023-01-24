@@ -15,7 +15,7 @@ const SongItem = ({
   return (
     <div
       onClick={() => {
-        handlePlaySong(song?.encodeId);
+        handlePlaySong(song?.encodeId, song?.streamingStatus);
       }}
       key={song.encodeId}
       className="flex items-center justify-between px-2 transition-all rounded-lg cursor-pointer hover-bg"

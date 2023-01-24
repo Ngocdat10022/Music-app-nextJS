@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { usePlaySong } from "../../../../hooks/usePlaySong";
@@ -23,7 +24,7 @@ const BannerItem = ({ banner }: PropsBannerItem) => {
       className="overflow-hidden cursor-pointer rounded-2xl"
       onClick={() => {
         alert("Bạn có muốn phát bài hát");
-        handlePlaySong(banner.encodeId);
+        handlePlaySong(banner.encodeId, banner?.streamingStatus);
       }}
     >
       <img width="100%" height="100%" src={`${banner?.banner}`} alt="avatar" />

@@ -8,7 +8,7 @@ const SongNewRelesea = ({ songItem }: { songItem: ISongDetailPlayList }) => {
   return (
     <div
       onClick={() => {
-        handlePlaySong(songItem?.encodeId);
+        handlePlaySong(songItem?.encodeId, songItem?.streamingStatus);
       }}
       className="flex items-center gap-2 p-2 transition-all rounded-md cursor-pointer hover-bg"
     >
