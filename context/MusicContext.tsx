@@ -58,7 +58,7 @@ export const MusicContextProvider = ({ children }: Props) => {
   // console.log("linkPlay", linkPlay);
   // console.log("infoSong", infoSong);
   useEffect(() => {
-    const fetch = async () => {
+    const fetchSongSearch = async () => {
       const result = await getSearch(debouncedValue);
       console.log(result);
       if (result.data.songs && result.data.artists) {
@@ -69,7 +69,7 @@ export const MusicContextProvider = ({ children }: Props) => {
         setSongs([]);
       }
     };
-    fetch();
+    fetchSongSearch();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debouncedValue]);
 

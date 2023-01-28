@@ -6,13 +6,19 @@ import { setCookiesSongId } from "../utils/musicCookie";
 export const usePlaySong = () => {
   const { setEncodeId, setAutoPlay } = useContext(MusicContext);
   const handlePlaySong = (id: string, streamingStatus: number) => {
-    if (streamingStatus === 1) {
+    if (!streamingStatus) {
       setCookiesSongId(id);
       setEncodeId(id);
       setAutoPlay(true);
-    }
-    if (streamingStatus === 2) {
-      toast.error("Không thể nghe");
+    } else {
+      if (streamingStatus === 1) {
+        setCookiesSongId(id);
+        setEncodeId(id);
+        setAutoPlay(true);
+      }
+      if (streamingStatus === 2) {
+        toast.error("Không thể phát");
+      }
     }
   };
   return handlePlaySong;
