@@ -32,6 +32,8 @@
     "react-slick": "^0.29.0",
     "react-toastify": "^9.1.1",
     "sass": "^1.57.1",
+    "sweetalert": "^2.1.2",
+    "sweetalert2": "^11.7.1",
     "typescript": "4.9.4",
     "video-react": "^0.16.0",
     "zingmp3-api": "^1.0.10",

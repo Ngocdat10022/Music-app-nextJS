@@ -152,7 +152,7 @@ const Header = () => {
           <div className="avatar w-[40px] h-[40px] rounded-full overflow-hidden">
             <img
               className="w-full h-full"
-              src="https://scontent.fdad3-5.fna.fbcdn.net/v/t39.30808-6/316292360_1327241011447456_8130773921582924338_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=XIbi0uhniacAX86aCRV&_nc_ht=scontent.fdad3-5.fna&oh=00_AfDMPle3VqBZgkwbMBxNgh1JhTAtUGSd4whPN0bFcQjiAg&oe=63BFB4FB"
+              src="https://scontent.fsgn5-13.fna.fbcdn.net/v/t39.30808-6/307444527_1274631903375034_543478671407240575_n.jpg?stp=cp6_dst-jpg&_nc_cat=106&ccb=1-7&_nc_sid=8bfeb9&_nc_ohc=DFvYk2Pqel0AX8FW-g2&_nc_ht=scontent.fsgn5-13.fna&oh=00_AfBi32nYVq3lXwmuO19g9NSKTEFhAXmeTvLOzXJKpkuzjA&oe=63D45C9F"
               alt="avatar"
             />
           </div>
