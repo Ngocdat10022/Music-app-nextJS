@@ -2,6 +2,7 @@ import React, { useState, createContext, useEffect } from "react";
 import UseDebounce from "../hooks/useDebounce";
 import { getInfoSong, getSearch, getTheSong } from "../service/api";
 import { IInfoSong, IMsuicSongs, IMusicArtist } from "../constant/interface";
+import { sleep } from "../constant/globalFunc";
 interface Props {
   children: React.ReactNode;
 }
@@ -21,6 +22,8 @@ interface IMusicContext {
   setEncodeId: React.Dispatch<React.SetStateAction<string>>;
   infoSong: IInfoSong[];
   setInfoSong: React.Dispatch<React.SetStateAction<IInfoSong[]>>;
+  loading: boolean;
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 const MusicDefaultData = {
   songs: [],
@@ -38,6 +41,8 @@ const MusicDefaultData = {
   setEncodeId: () => {},
   infoSong: [],
   setInfoSong: () => {},
+  loading: true,
+  setLoading: () => {},
 };
 export const MusicContext = createContext<IMusicContext>(MusicDefaultData);
 export const MusicContextProvider = ({ children }: Props) => {
@@ -51,6 +56,7 @@ export const MusicContextProvider = ({ children }: Props) => {
   const [autoPlay, setAutoPlay] = useState<boolean>(MusicDefaultData.autoPlay);
   const [linkPlay, setLinkPlay] = useState<string>(MusicDefaultData.linkPlay);
   const [encodeId, setEncodeId] = useState<string>(MusicDefaultData.encodeId);
+  const [loading, setLoading] = useState<boolean>(MusicDefaultData.loading);
   const [infoSong, setInfoSong] = useState<IInfoSong[]>(
     MusicDefaultData.infoSong
   );
@@ -60,11 +66,14 @@ export const MusicContextProvider = ({ children }: Props) => {
   useEffect(() => {
     const fetchSongSearch = async () => {
       const result = await getSearch(debouncedValue);
-      console.log(result);
+      setLoading(true);
+      await sleep(2000);
       if (result.data.songs && result.data.artists) {
+        setLoading(false);
         setSongs(result.data.songs || []);
         setArtists(result.data.artists || []);
       } else {
+        setLoading(false);
         setArtists([]);
         setSongs([]);
       }
@@ -120,6 +129,8 @@ export const MusicContextProvider = ({ children }: Props) => {
         setEncodeId,
         infoSong,
         setInfoSong,
+        loading,
+        setLoading,
       }}
     >
       {children}

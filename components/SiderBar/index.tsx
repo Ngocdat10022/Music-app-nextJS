@@ -98,8 +98,8 @@ const SiderBar = () => {
           alt="logo2"
         />
       </div>
-      <div className="flex flex-col items-center h-full">
-        <nav className="relative w-full shadow-nav">
+      <div className="flex flex-col items-center overflow-y-scroll nav-container poper-scroll">
+        <nav className="relative w-full">
           <ul>
             {NAV_ONE.map((item) => {
               return (
@@ -128,7 +128,7 @@ const SiderBar = () => {
             width: "100%",
           }}
         >
-          <div className="relative flex  flex-col pb-[54px] mt-8 ">
+          <div className="relative flex  flex-col pb-[54px] mt-4 ">
             <nav className="relative w-full ">
               <ul>
                 {NAV_TWO.map((item) => {

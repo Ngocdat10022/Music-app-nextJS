@@ -7,6 +7,7 @@ import useToggleValue from "../../../hooks/useToggleValue";
 import { getSearch } from "../../../service/api";
 import UseDebounce from "../../../hooks/useDebounce";
 import { MusicContext } from "../../../context/MusicContext";
+import Loading from "../../Loading";
 const Search = () => {
   const dataPropose: {
     icon: React.ReactNode;
@@ -41,8 +42,7 @@ const Search = () => {
     debouncedValue,
     artists,
     songs,
-    setEncodeId,
-    setAutoPlay,
+    loading,
   } = useContext(MusicContext);
   return (
     <HeadlessTippy
@@ -57,9 +57,9 @@ const Search = () => {
           {...attrs}
         >
           {!debouncedValue ? (
-            <PoperWrapper isScroll={false} height="300px">
+            <PoperWrapper isScroll={true} height="300px">
               <h4 className="mb-3 text-sm font-bold">Đề xuất cho bạn</h4>
-              <div className="flex flex-col">
+              <div className="flex flex-col h-full">
                 {dataPropose.map((item) => (
                   <li
                     onClick={() => setSearchValue(item.title)}
@@ -77,13 +77,19 @@ const Search = () => {
             <PoperWrapper isScroll={true} height="550px">
               <div className="pb-5">
                 <h4 className="mb-3 text-sm font-bold">Nghệ sĩ</h4>
-                <div className="flex flex-col gap-2">
-                  {artists.length > 0 ? (
+                <div className="flex flex-col h-full gap-2">
+                  {loading ? (
+                    <div className="flex items-center justify-center">
+                      <Loading />
+                    </div>
+                  ) : artists.length > 0 && artists ? (
                     artists.map((item: any) => {
                       return <ArtisItem key={item.id} data={item} />;
                     })
                   ) : (
-                    <h1>Không tìm thấy nghệ sĩ</h1>
+                    <div className="flex items-center justify-center">
+                      <h1>Không tìm thấy kết quả</h1>
+                    </div>
                   )}
                 </div>
               </div>

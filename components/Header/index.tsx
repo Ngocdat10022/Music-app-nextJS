@@ -76,7 +76,7 @@ const Header = () => {
             </div>
             <Search />
           </div>
-          <div className="flex items-center h-full gap-2 max-md:fixed max-md:top-5 max-md:right-5 max-md:flex-col ">
+          <div className="flex items-center h-full gap-2 max-md:fixed max-md:top-5 max-md:ml-2 max-md:right-2 max-md:flex-col ">
             {navigateUser.map((item) => {
               return (
                 <Tippy
