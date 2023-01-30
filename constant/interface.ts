@@ -1,4 +1,5 @@
 export interface Nav {
+  id: number;
   title: string;
   icon: React.ReactNode;
   to: string;

@@ -87,37 +87,25 @@ export const getMusicChart = async () => {
   }
 };
 export const getEncodeId = async () => {
-  // const data = await getDataHome(1);
-  // const dataTop100 = await getTop100();
   const [data, dataTop100] = await Promise.all([getDataHome(1), getTop100()]);
-  // const dataBannerHome = data?.data?.items[0].items;
-  const dataOutstanding = dataTop100.data[0]?.items;
-  const dataVietNamese = dataTop100.data[1]?.items;
-  const dataAsia = dataTop100.data[2]?.items;
-  const dataUsUk = dataTop100.data[2]?.items;
-  const dataSymphony = dataTop100.data[2]?.items;
+  const dataAll = [...data?.data?.items, ...dataTop100?.data];
+  const allDatas = dataAll
+    .map((item: any) => {
+      if (item?.items) {
+        if (Array.isArray(item?.items)) {
+          return item?.items;
+        }
+      }
+    })
+    .filter((item: any) => !!item)
+    .reduce((acc: [], crr: []) => {
+      return acc.concat(crr);
+    }, []);
 
-  const dataMusicSpring = data?.data.items[2].items;
-  const dataArtistsTrending = data?.data.items[5].items;
-  const dataNewDayMusic = data?.data.items[7].items;
-  const dataConner = data?.data.items[13].items;
-  const dataBanner = data?.data?.items[0].items;
-  const allData = [
-    ...dataMusicSpring,
-    ...dataArtistsTrending,
-    ...dataNewDayMusic,
-    ...dataConner,
-    ...dataOutstanding,
-    ...dataVietNamese,
-    ...dataAsia,
-    ...dataUsUk,
-    ...dataSymphony,
-    ...dataBanner,
-  ];
-  return allData.map((item: any) => {
+  return allDatas.map((item: any) => {
     return {
       params: {
-        detailPlayList: `${item?.encodeId.toString()}`,
+        detailPlayList: `${item?.encodeId}`,
       },
     };
   });

@@ -76,7 +76,7 @@ const IdVideo = () => {
               <span className="text-sm text-text2">{info?.artistsNames}</span>
             </div>
           </div>
-          <Player playsInline poster="/assets/poster.png" src={linkVideo} />
+          <Player playsInline poster={`${info?.thumbnailM}`} src={linkVideo} />
           <div className="flex items-center gap-3">
             {qualityList.map((item, index) => {
               return (

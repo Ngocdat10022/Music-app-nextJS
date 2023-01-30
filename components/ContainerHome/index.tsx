@@ -35,7 +35,7 @@ const ContainerHome = () => {
   return (
     <div>
       <Banner />
-      <Title>Tết Đến Rộn Ràng</Title>
+      <Title>Khởi Động Ngày Mới</Title>
       <List>
         {musicSpring.length &&
           musicSpring.map((item) => {

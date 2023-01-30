@@ -108,6 +108,7 @@ export const getStaticPaths = async () => {
     fallback: false,
   };
 };
+
 export const getStaticProps = async (paths: any) => {
   const params = paths.params;
   const data = await getPlayListDetailt(params.detailPlayList);

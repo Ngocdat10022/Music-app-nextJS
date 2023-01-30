@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Personal from "../../assets/Icons/Personal";
 import Chart from "../../assets/Icons/Chart";
 import Discover from "../../assets/Icons/Discover";
@@ -16,26 +16,31 @@ import PerfectScrollbar from "react-perfect-scrollbar";
 import "react-perfect-scrollbar/dist/css/styles.css";
 const NAV_ONE: Nav[] = [
   {
+    id: 0,
     title: "Cá Nhân",
     icon: <Personal />,
     to: "/",
   },
   {
+    id: 1,
     title: "Khám Phá",
     icon: <Discover />,
     to: "/",
   },
   {
+    id: 2,
     title: "Thể Loại",
     icon: <Category />,
     to: "/",
   },
   {
+    id: 3,
     title: "Radio",
     icon: <Radio />,
     to: "/",
   },
   {
+    id: 4,
     title: "Theo Dõi",
     icon: <Follow />,
     to: "/",
@@ -43,33 +48,49 @@ const NAV_ONE: Nav[] = [
 ];
 const NAV_TWO: Nav[] = [
   {
-    title: "Nhạc Mới",
-    icon: <MusicNew />,
-    to: "/",
-  },
-
-  {
+    id: 5,
     title: "#Zingchart",
     icon: <Chart />,
     to: "/Chart",
   },
   {
+    id: 6,
     title: "Top100",
     icon: <Star />,
     to: "/Top100",
   },
   {
+    id: 7,
     title: "Mv",
     icon: <Mv />,
     to: "Mv",
   },
+  {
+    id: 8,
+    title: "Nhạc Mới",
+    icon: <MusicNew />,
+    to: "/",
+  },
 ];
 const SiderBar = () => {
   const [isWidth, setIsWidth] = useState<boolean>(true);
+  const [active, setActive] = useState<number>(0);
   const handleWidthSiderBar = () => {
     setIsWidth(!isWidth);
   };
   ("	https://zjs.zmdcdn.me/zmp3-desktop/releases/v1.8.22/static/media/icon_zing_mp3_60.f6b51045.svg");
+
+  useEffect(() => {
+    // NAV_TWO[0].title === "#Zingchart"
+    //   ? setActive(5)
+    //   : NAV_TWO[1].title === "Top100"
+    //   ? setActive(6)
+    //   : NAV_TWO[2].title === "Mv"
+    //   ? setActive(7)
+    //   : NAV_TWO[3].title === "Nhạc Mới"
+    //   ? setActive(8)
+    //   : setActive(0);
+  }, []);
   return (
     <div
       className={`siderbar-container py-2 ${
@@ -103,7 +124,11 @@ const SiderBar = () => {
           <ul>
             {NAV_ONE.map((item) => {
               return (
-                <li key={item.title}>
+                <li
+                  key={item.title}
+                  className={`${item.id === active ? "active" : ""}`}
+                  onClick={() => setActive(item.id)}
+                >
                   <Link
                     href="/"
                     className="flex items-center gap-3 px-6 py-2 text-[12px] font-bold text-text1 hover:text-white"
@@ -133,7 +158,11 @@ const SiderBar = () => {
               <ul>
                 {NAV_TWO.map((item) => {
                   return (
-                    <li key={item.title}>
+                    <li
+                      key={item.title}
+                      className={`${item.id === active ? "active" : ""}`}
+                      onClick={() => setActive(item.id)}
+                    >
                       <Link
                         href={`/${item.to}`}
                         className="flex items-center gap-3 px-6 py-2 text-[12px] font-bold text-text1 hover:text-white"
@@ -152,7 +181,7 @@ const SiderBar = () => {
                 })}
               </ul>
             </nav>
-            <div className="flex flex-col items-center mb-2">
+            <div className="flex flex-col items-center mt-2 mb-2">
               <CardSiderBar
                 border="border"
                 bgBtn="bg-transparent"

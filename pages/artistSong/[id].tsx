@@ -43,10 +43,10 @@ const ArtistSong = () => {
           )}
         </div>
         {artistSong && (
-          <div className="flex items-center justify-center mt-6 mb-6">
+          <div className="flex items-center justify-center">
             <button
               onClick={handleSetCount}
-              className="text-primary active:text-text2"
+              className="my-6 text-primary active:text-text2"
             >
               Xem thêm
             </button>

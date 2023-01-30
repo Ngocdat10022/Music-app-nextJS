@@ -13,8 +13,8 @@ const Top100 = ({ data }: { data: any }) => {
   const dataOutstanding: IDataMusicSpring[] = data.data[0]?.items;
   const dataVietNamese: IDataMusicSpring[] = data.data[1]?.items;
   const dataAsia: IDataMusicSpring[] = data.data[2]?.items;
-  const dataUsUk: IDataMusicSpring[] = data.data[2]?.items;
-  const dataSymphony: IDataMusicSpring[] = data.data[2]?.items;
+  const dataUsUk: IDataMusicSpring[] = data.data[3]?.items;
+  const dataSymphony: IDataMusicSpring[] = data.data[4]?.items;
   return (
     <MusicContextProvider>
       <Layout>

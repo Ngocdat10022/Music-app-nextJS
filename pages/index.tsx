@@ -10,7 +10,7 @@ import {
   IDataMusicSpring,
   IDataNewRelease,
 } from "../constant/interface";
-import { getDataHome } from "../service/api";
+import { getDataHome, getTop100 } from "../service/api";
 import Toast from "../components/Toast";
 const inter = Inter({ subsets: ["latin"] });
 interface Props {
@@ -21,6 +21,7 @@ interface Props {
   dataArtistsTrending: IArtistsTrending[];
   dataNewDayMusic: IDataMusicSpring[];
   dataConner: IDataMusicSpring[];
+  dataTop100: {}[];
 }
 export default function Home({
   dataBannerHome,
@@ -30,6 +31,7 @@ export default function Home({
   dataArtistsTrending,
   dataNewDayMusic,
   dataConner,
+  dataTop100,
 }: Props) {
   const dataNewReleases = [{ ...dataNewRelease }];
   const [dataBanner, setDataBanner] = useState<IDataBanner[]>(dataBannerHome);
@@ -42,7 +44,33 @@ export default function Home({
   const [newDayMusic, setNewDayMusic] =
     useState<IDataMusicSpring[]>(dataNewDayMusic);
   const [conner, setConner] = useState<IDataMusicSpring[]>(dataConner);
-  console.log("dataHome", dataHome);
+  console.log("data", dataTop100, dataHome);
+  // const [allArrayData, setAllArrayData] = useState([]);
+
+  // const dataAll = [...dataHome?.data?.items, ...dataTop100?.data];
+  // const allDatas = dataAll
+  //   .map((item: any) => {
+  //     if (item?.items) {
+  //       if (Array.isArray(item?.items)) {
+  //         return item?.items;
+  //       }
+  //     }
+  //   })
+  //   .filter((item: any) => !!item)
+  //   .reduce((acc: [], crr: []) => {
+  //     return acc.concat(crr);
+  //   }, []);
+  // console.log("allDatas", allDatas);
+
+  // const dataH = dataHome?.data?.items.filter((item: any) => {
+  //   return (
+  //     item?.sectionType === "new-release" ||
+  //     item?.sectionType === "banner" ||
+  //     item?.sectionType === "playlist"
+  //   );
+  // });
+  // console.log("dataH", dataH);
+
   return (
     <div className="app">
       <HomeContext.Provider
@@ -67,13 +95,31 @@ export default function Home({
   );
 }
 export const getStaticProps = async () => {
-  const [dataHome] = await Promise.all([getDataHome(1)]);
-  const dataBannerHome = dataHome?.data?.items[0].items;
-  const dataMusicSpring = dataHome?.data.items[2].items;
-  const dataNewRelease = dataHome?.data.items[4].items;
-  const dataArtistsTrending = dataHome?.data.items[5].items;
-  const dataNewDayMusic = dataHome?.data.items[7].items;
-  const dataConner = dataHome?.data.items[13].items;
+  const [dataHome, dataTop100] = await Promise.all([
+    getDataHome(1),
+    getTop100(),
+  ]);
+  // const dataBannerHome = dataHome?.data.items[0].items;
+  // const dataMusicSpring = dataHome?.data.items[4].items;
+  // const dataArtistsTrending = dataHome?.data.items[5].items;
+  // const dataNewRelease = dataHome?.data.items[3].items;
+  // const dataNewDayMusic = dataHome?.data.items[7].items;
+  // const dataConner = dataHome?.data.items[13].items;
+
+  const data = dataHome?.data?.items.filter((item: any) => {
+    return (
+      item?.sectionType === "new-release" ||
+      item?.sectionType === "banner" ||
+      item?.sectionType === "playlist"
+    );
+  });
+  const dataBannerHome = data[0].items;
+  const dataNewRelease = data[1].items;
+  const dataMusicSpring = data[2].items;
+  const dataArtistsTrending = data[3].items;
+  const dataNewDayMusic = data[4].items;
+  const dataConner = data[6].items;
+
   return {
     props: {
       dataHome,
@@ -83,6 +129,7 @@ export const getStaticProps = async () => {
       dataArtistsTrending,
       dataNewDayMusic,
       dataConner,
+      dataTop100,
     },
   };
 };
