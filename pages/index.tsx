@@ -60,20 +60,20 @@ export default function Home({
   // console.log("dataTitle", dataTitle);
   // const [allArrayData, setAllArrayData] = useState([]);
 
-  const dataAll = [...dataHome?.data?.items, ...dataTop100?.data];
-  const allDatas = dataAll
-    .filter((item) => {
-      return item?.sectionType === "playlist" || item.sectionType === "banner";
-    })
-    .map((item) => {
-      return item.items;
-    })
-    .reduce((acc: [], crr: []) => {
-      return acc.concat(crr);
-    }, [])
-    .filter((item: any) => {
-      return !(item.type === 1);
-    });
+  // const dataAll = [...dataHome?.data?.items, ...dataTop100?.data];
+  // const allDatas = dataAll
+  //   .filter((item) => {
+  //     return item?.sectionType === "playlist" || item.sectionType === "banner";
+  //   })
+  //   .map((item) => {
+  //     return item.items;
+  //   })
+  //   .reduce((acc: [], crr: []) => {
+  //     return acc.concat(crr);
+  //   }, [])
+  //   .filter((item: any) => {
+  //     return !(item.type === 1);
+  //   });
 
   // console.log("allDatas", allDatas);
 
