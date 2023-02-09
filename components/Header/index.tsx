@@ -33,7 +33,7 @@ const Header = () => {
     },
   ];
   const { value: showSearchMobile, handleToggleValue: handleShowSearchMobile } =
-    useToggleValue();
+    useToggleValue(false);
   return (
     <>
       <div className="bg-header ml-[240px] max-lg:ml-[70px] fixed z-30 top-0 right-0 left-0 h-[70px] bg-slate-600 py-0 px-[60px] max-lg:px-[20px] max-sm:hidden">
@@ -124,14 +124,40 @@ const Header = () => {
               className="text-white cursor-pointer"
               onClick={() => handleShowSearchMobile()}
             >
-              <Close />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                className="w-6 h-6"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M6 18L18 6M6 6l12 12"
+                ></path>
+              </svg>
             </span>
           ) : (
             <span
               className="cursor-pointer"
               onClick={() => handleShowSearchMobile()}
             >
-              <SearchIcon />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                className="w-8 h-8"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+                ></path>
+              </svg>
             </span>
           )}
           <div className="avatar w-[40px] h-[40px] rounded-full overflow-hidden">

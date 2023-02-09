@@ -33,7 +33,7 @@ const Search = () => {
     },
   ];
   const { value: showTippy, handleToggleValue: handleSetShowTippy } =
-    useToggleValue();
+    useToggleValue(false);
   const {
     searchValue,
     setSearchValue,
@@ -174,14 +174,4 @@ const IconChart = () => {
     </svg>
   );
 };
-// export const getStaticProps = async () => {
-//   const musicSearch = await ZingMp3.search("Sơn Tùng MTP").then((data: any) => {
-//     return data;
-//   });
-//   return {
-//     props: {
-//       musicSearch,
-//     },
-//   };
-// };
 export default Search;

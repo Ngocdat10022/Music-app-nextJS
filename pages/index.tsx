@@ -55,27 +55,24 @@ export default function Home({
   const [dataTitles, setDataTitles] = useState(dataTitle);
   // console.log("dataNewReldataNewReleasesease", dataNewReleases);
   // console.log("dataConvert", dataConvert);
-  // console.log("data", dataTop100, dataHome);
+  console.log("dataHome", dataHome);
+  console.log("dataTop100", dataTop100);
   // console.log("dataTitle", dataTitle);
   // const [allArrayData, setAllArrayData] = useState([]);
 
-  // const dataAll = [...dataHome?.data?.items, ...dataTop100?.data];
-  // const allDatas = dataAll
-  //   .map((item: any) => {
-  //     if (item?.items) {
-  //       if (Array.isArray(item?.items)) {
-  //         return item?.items;
-  //       }
-  //     }
-  //   })
-  //   .filter((item: any) => !!item)
-  //   .reduce((acc: [], crr: []) => {
-  //     return acc.concat(crr);
-  //   }, [])
-  //   .filter((item: any) => {
-  //     return item.textType === "Playlist";
-  //   });
-  // console.log("allDatas", allDatas);
+  const dataAll = [...dataHome?.data?.items, ...dataTop100?.data];
+  const allDatas = dataAll
+    .filter((item) => {
+      return item?.sectionType === "playlist";
+    })
+    .map((item) => {
+      return item.items;
+    })
+    .reduce((acc: [], crr: []) => {
+      return acc.concat(crr);
+    }, []);
+
+  console.log("allDatas", allDatas);
 
   // const dataH = dataHome?.data?.items.filter((item: any) => {
   //   return (

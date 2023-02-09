@@ -20,7 +20,7 @@ const MusicItem = ({ song, index }: { song: any; index: number }) => {
       >
         <div className="w-[50px] h-[50px] relative overflow-hidden rounded-md">
           <img
-            className="object-cover w-full h-full"
+            className="object-cover w-[50px] h-[50px]"
             src={`${song?.thumbnailM}`}
             alt="avatar"
           />

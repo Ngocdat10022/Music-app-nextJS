@@ -14,7 +14,7 @@ const ArtisItem = ({ data }: Props) => {
       >
         <div className="w-[40px h-[40px] overflow-hidden rounded-full">
           <img
-            className="w-full h-full"
+            className="w-[40px h-[40px]"
             src={`${data?.thumbnailM}`}
             alt="avatar"
           />

@@ -90,20 +90,15 @@ export const getEncodeId = async () => {
   const [data, dataTop100] = await Promise.all([getDataHome(1), getTop100()]);
   const dataAll = [...data?.data?.items, ...dataTop100?.data];
   const allDatas = dataAll
-    .map((item: any) => {
-      if (item?.items) {
-        if (Array.isArray(item?.items)) {
-          return item?.items;
-        }
-      }
+    .filter((item) => {
+      return item?.sectionType === "playlist";
     })
-    .filter((item: any) => !!item)
+    .map((item) => {
+      return item.items;
+    })
     .reduce((acc: [], crr: []) => {
       return acc.concat(crr);
-    }, [])
-    .filter((item: any) => {
-      return item.textType === "Playlist";
-    });
+    }, []);
 
   return allDatas.map((item: any) => {
     return {

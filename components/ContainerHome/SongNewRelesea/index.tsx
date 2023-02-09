@@ -27,7 +27,7 @@ const SongNewRelesea = ({
     >
       <div className="w-[60px h-[60px] relative overflow-hidden rounded-md">
         <img
-          className="w-full h-full "
+          className="w-[60px h-[60px] "
           src={`${songItem?.thumbnailM}`}
           alt="avatar"
         />

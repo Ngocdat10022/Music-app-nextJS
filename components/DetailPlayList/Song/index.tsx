@@ -30,7 +30,7 @@ const SongItem = ({
         <div className="relative flex items-center gap-2 p-2 rounded-xl ">
           <div className="max-sm:hidden relative z-10 w-[50px h-[50px] overflow-hidden rounded-lg">
             <img
-              className="z-10 w-full h-full "
+              className="z-10 w-[50px h-[50px] "
               src={`${song?.thumbnailM}`}
               alt="avatar"
             />
