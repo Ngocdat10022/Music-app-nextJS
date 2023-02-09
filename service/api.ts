@@ -91,14 +91,17 @@ export const getEncodeId = async () => {
   const dataAll = [...data?.data?.items, ...dataTop100?.data];
   const allDatas = dataAll
     .filter((item) => {
-      return item?.sectionType === "playlist";
+      return item?.sectionType === "playlist" || item.sectionType === "banner";
     })
     .map((item) => {
       return item.items;
     })
     .reduce((acc: [], crr: []) => {
       return acc.concat(crr);
-    }, []);
+    }, [])
+    .filter((item: any) => {
+      return !(item.type === 1);
+    });
 
   return allDatas.map((item: any) => {
     return {
