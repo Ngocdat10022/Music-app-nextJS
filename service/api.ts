@@ -100,7 +100,10 @@ export const getEncodeId = async () => {
     .filter((item: any) => !!item)
     .reduce((acc: [], crr: []) => {
       return acc.concat(crr);
-    }, []);
+    }, [])
+    .filter((item: any) => {
+      return item.textType === "Playlist";
+    });
 
   return allDatas.map((item: any) => {
     return {

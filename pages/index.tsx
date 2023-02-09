@@ -71,7 +71,10 @@ export default function Home({
   //   .filter((item: any) => !!item)
   //   .reduce((acc: [], crr: []) => {
   //     return acc.concat(crr);
-  //   }, []);
+  //   }, [])
+  //   .filter((item: any) => {
+  //     return item.textType === "Playlist";
+  //   });
   // console.log("allDatas", allDatas);
 
   // const dataH = dataHome?.data?.items.filter((item: any) => {
