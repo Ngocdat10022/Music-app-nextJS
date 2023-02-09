@@ -1,16 +1,15 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
-import Search from "./Search";
 import Tippy from "@tippyjs/react";
 import "tippy.js/animations/perspective.css";
 import Setting from "../../assets/Icons/Setting";
 import Upload from "../../assets/Icons/Upload";
 import Shirt from "../../assets/Icons/Shirt";
+import Search from "./Search";
 import SearchMobile from "./OverlaySearchMobile";
 import useToggleValue from "../../hooks/useToggleValue";
 import Close from "../../assets/Icons/Close";
 import SearchIcon from "../../assets/Icons/SearchIcon";
-import { MusicContextProvider } from "../../context/MusicContext";
 const Header = () => {
   const navigateUser: {
     titleTooltip: string;
@@ -133,26 +132,12 @@ const Header = () => {
               onClick={() => handleShowSearchMobile()}
             >
               <SearchIcon />
-              {/* <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                className="w-8 h-8"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-                />
-              </svg> */}
             </span>
           )}
           <div className="avatar w-[40px] h-[40px] rounded-full overflow-hidden">
             <img
               className="w-full h-full"
-              src="https://scontent.fsgn5-13.fna.fbcdn.net/v/t39.30808-6/307444527_1274631903375034_543478671407240575_n.jpg?stp=cp6_dst-jpg&_nc_cat=106&ccb=1-7&_nc_sid=8bfeb9&_nc_ohc=DFvYk2Pqel0AX8FW-g2&_nc_ht=scontent.fsgn5-13.fna&oh=00_AfBi32nYVq3lXwmuO19g9NSKTEFhAXmeTvLOzXJKpkuzjA&oe=63D45C9F"
+              src="http://static.mp3.zdn.vn/skins/common/logo600.png"
               alt="avatar"
             />
           </div>

@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
-import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { memo } from "react";
 interface Props {
   data: any;
 }
@@ -26,4 +25,4 @@ const ArtisItem = ({ data }: Props) => {
   );
 };
 
-export default ArtisItem;
+export default memo(ArtisItem);

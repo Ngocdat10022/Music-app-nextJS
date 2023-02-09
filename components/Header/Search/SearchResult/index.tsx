@@ -1,19 +1,19 @@
-import React, { useContext } from "react";
+import React, { useContext, memo } from "react";
 import { MusicContext } from "../../../../context/MusicContext";
 import Loading from "../../../Loading";
 import MusicItem from "../Poper/SongItem";
 
-const Searchresult = ({ data }: { data: any }) => {
-  const { loading } = useContext(MusicContext);
+const SearchResult = ({ data }: { data: any }) => {
+  const { loadingSearch } = useContext(MusicContext);
   return (
     <div className="flex flex-col gap-2">
-      {loading ? (
+      {loadingSearch ? (
         <div className="flex items-center justify-center">
           <Loading />
         </div>
       ) : data.length > 0 && data ? (
-        data.map((item: any) => {
-          return <MusicItem key={item.encodeId} song={item} />;
+        data.map((item: any, index: number) => {
+          return <MusicItem key={item.encodeId} song={item} index={index} />;
         })
       ) : (
         <h1 className="flex items-center justify-center">
@@ -24,4 +24,4 @@ const Searchresult = ({ data }: { data: any }) => {
   );
 };
 
-export default Searchresult;
+export default memo(SearchResult);

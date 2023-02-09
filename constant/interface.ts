@@ -50,7 +50,7 @@ export interface IMusicArtist {
   thumbnailM: string;
   totalFollow: number;
 }
-export interface IDataBanner {
+export interface IDataBannerPlayList {
   banner: string;
   cover: string;
   description: string;
@@ -60,7 +60,11 @@ export interface IDataBanner {
   target: string;
   title: string;
   type: number;
+  streamingStatus: number;
 }
+export interface IDataBannerPlay {}
+
+export interface IDataBannerRadio {}
 export interface IDataMusicSpring {
   PR: boolean;
   artists: [];

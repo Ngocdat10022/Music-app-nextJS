@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 
 const NameArtist = ({ children }: { children: string }) => {
   return (
@@ -8,4 +8,4 @@ const NameArtist = ({ children }: { children: string }) => {
   );
 };
 
-export default NameArtist;
+export default memo(NameArtist);

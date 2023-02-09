@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
-import React, { useContext } from "react";
+import React, { memo } from "react";
 import HeartIcon from "../../assets/Icons/HeartIcon";
 import List from "../../assets/Icons/List";
 import PlayIcon from "../../assets/Icons/PlayIcon";
@@ -40,4 +40,4 @@ const CardItem = ({ item }: { item: any }) => {
   );
 };
 
-export default CardItem;
+export default memo(CardItem);

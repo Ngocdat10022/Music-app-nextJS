@@ -1,5 +1,6 @@
 import React, { createContext, useEffect, useState } from "react";
 import { IVideoItem } from "../constant/interface";
+import { useLoading } from "../hooks/useLoading";
 import { getlistMV } from "../service/api";
 
 interface IPropVideoContext {
@@ -7,8 +8,8 @@ interface IPropVideoContext {
 }
 
 interface IVideoContext {
-  loading: boolean;
-  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  loadingVideo: boolean;
+  setLoadingVideo: React.Dispatch<React.SetStateAction<boolean>>;
   listVideo: IVideoItem[];
   setListVideo: React.Dispatch<React.SetStateAction<IVideoItem[]>>;
   linitIndex: number;
@@ -16,8 +17,8 @@ interface IVideoContext {
 }
 
 const valueVideoContext = {
-  loading: false,
-  setLoading: () => {},
+  loadingVideo: false,
+  setLoadingVideo: () => {},
   listVideo: [],
   setListVideo: () => {},
   linitIndex: 20,
@@ -28,24 +29,30 @@ export const VideoContext = createContext<IVideoContext>(valueVideoContext);
 
 export const VideoContextProvider = ({ children }: IPropVideoContext) => {
   const [listVideo, setListVideo] = useState<IVideoItem[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
+  // const [loading, setLoading] = useState<boolean>(false);
+  const { loading: loadingVideo, setLoading: setLoadingVideo } =
+    useLoading(false);
   const [linitIndex, setLimitIndex] = useState<number>(20);
   useEffect(() => {
     (async () => {
+      setLoadingVideo(true);
       try {
         const dataListVideo = await getlistMV("IWZ9Z08I", 1, linitIndex);
         setListVideo(dataListVideo?.data?.items);
+        setLoadingVideo(false);
       } catch (error) {
+        setLoadingVideo(false);
         console.log("error", error);
       }
     })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [linitIndex]);
   return (
     <VideoContext.Provider
       value={{
         listVideo,
-        loading,
-        setLoading,
+        loadingVideo,
+        setLoadingVideo,
         setListVideo,
         linitIndex,
         setLimitIndex,

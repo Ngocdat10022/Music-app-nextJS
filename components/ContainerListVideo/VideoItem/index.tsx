@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
-import React from "react";
+import React, { memo } from "react";
 import { IVideoItem } from "../../../constant/interface";
 
 const VideoItem = ({ data }: { data: IVideoItem }) => {
@@ -36,4 +36,4 @@ const VideoItem = ({ data }: { data: IVideoItem }) => {
   );
 };
 
-export default VideoItem;
+export default memo(VideoItem);

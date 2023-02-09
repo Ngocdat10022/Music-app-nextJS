@@ -1,13 +1,13 @@
 import React, { createContext } from "react";
 import {
   IArtistsTrending,
-  IDataBanner,
+  IDataBannerPlayList,
   IDataMusicSpring,
   IDataNewRelease,
 } from "../constant/interface";
 
 interface HomeContext {
-  dataBanner: IDataBanner[];
+  dataBanner: IDataBannerPlayList[];
   // setDataBanner?: React.Dispatch<React.SetStateAction<IDataBanner[]>>;
   musicSpring: IDataMusicSpring[];
   // setMusicSpring?: React.Dispatch<React.SetStateAction<IDataMusicSpring[]>>;
@@ -16,6 +16,7 @@ interface HomeContext {
   artistsTrending: IArtistsTrending[];
   newDayMusic: IDataMusicSpring[];
   conner: IDataMusicSpring[];
+  dataTitles: {}[];
 }
 export const dataHomeDefault = {
   dataBanner: [],
@@ -27,5 +28,6 @@ export const dataHomeDefault = {
   artistsTrending: [],
   newDayMusic: [],
   conner: [],
+  dataTitles: [],
 };
 export const HomeContext = createContext<HomeContext>(dataHomeDefault);

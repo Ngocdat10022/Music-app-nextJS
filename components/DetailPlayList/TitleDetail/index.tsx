@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 
 const TitleDetail = ({ children }: { children: string }) => {
   return (
@@ -8,4 +8,4 @@ const TitleDetail = ({ children }: { children: string }) => {
   );
 };
 
-export default TitleDetail;
+export default memo(TitleDetail);

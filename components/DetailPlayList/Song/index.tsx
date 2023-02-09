@@ -1,9 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useContext } from "react";
+import React, { useContext, memo } from "react";
 import { ISongDetailPlayList } from "../../../constant/interface";
 import { MusicContext } from "../../../context/MusicContext";
 import { usePlaySong } from "../../../hooks/usePlaySong";
 import { formatTime } from "../../../utils/fomatTime";
+import { getCookiesSongId } from "../../../utils/musicCookie";
+import LoadingSong from "../../LoadingSong";
 const SongItem = ({
   song,
   index,
@@ -11,28 +13,35 @@ const SongItem = ({
   song: ISongDetailPlayList;
   index: number;
 }) => {
-  const handlePlaySong = usePlaySong();
-  const { encodeId } = useContext(MusicContext);
+  const { handlePlaySong } = usePlaySong();
+  const songId = getCookiesSongId();
+  const { loadingSong } = useContext(MusicContext);
   return (
     <div
       onClick={() => {
-        handlePlaySong(song?.encodeId, song?.streamingStatus);
+        handlePlaySong(song?.encodeId, song?.streamingStatus, index);
       }}
       key={song.encodeId}
       className={`${
-        encodeId === song.encodeId ? "active-song" : ""
+        songId === song?.encodeId ? "active-song" : ""
       } flex items-center justify-between px-2 transition-all rounded-lg cursor-pointer hover-bg`}
     >
-      <div className="media-left max-sm:w-full">
-        <div className="flex items-center gap-2 p-2 rounded-xl ">
-          <div className="max-sm:hidden w-[50px h-[50px] overflow-hidden rounded-lg">
+      <div className="relative z-10 media-left max-sm:w-full">
+        <div className="relative flex items-center gap-2 p-2 rounded-xl ">
+          <div className="max-sm:hidden relative z-10 w-[50px h-[50px] overflow-hidden rounded-lg">
             <img
-              className="w-full h-full "
+              className="z-10 w-full h-full "
               src={`${song?.thumbnailM}`}
               alt="avatar"
             />
+            {loadingSong && songId === song?.encodeId && <LoadingSong />}
           </div>
-          <div className="sm:hidden">{index}</div>
+          <div className="sm:hidden">
+            <div>
+              {index + 1}
+              {loadingSong && songId === song?.encodeId && <LoadingSong />}
+            </div>
+          </div>
           <div className="flex-1 max-sm:w-full">
             <p className="text-sm title music-item-des">{song?.title}</p>
             <p className="text-xs artist music-item-des text-text2">
@@ -51,4 +60,4 @@ const SongItem = ({
   );
 };
 
-export default SongItem;
+export default memo(SongItem);

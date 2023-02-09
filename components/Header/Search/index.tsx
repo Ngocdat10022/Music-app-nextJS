@@ -1,11 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import HeadlessTippy from "@tippyjs/react/headless";
 import PoperWrapper from "./Poper";
-import Searchresult from "./SearchResult";
+import SearchResult from "./SearchResult";
 import ArtisItem from "./Poper/ArtistItem";
 import useToggleValue from "../../../hooks/useToggleValue";
-import { getSearch } from "../../../service/api";
-import UseDebounce from "../../../hooks/useDebounce";
 import { MusicContext } from "../../../context/MusicContext";
 import Loading from "../../Loading";
 const Search = () => {
@@ -42,7 +40,7 @@ const Search = () => {
     debouncedValue,
     artists,
     songs,
-    loading,
+    loadingSearch,
   } = useContext(MusicContext);
   return (
     <HeadlessTippy
@@ -57,7 +55,7 @@ const Search = () => {
           {...attrs}
         >
           {!debouncedValue ? (
-            <PoperWrapper isScroll={true} height="300px">
+            <PoperWrapper>
               <h4 className="mb-3 text-sm font-bold">Đề xuất cho bạn</h4>
               <div className="flex flex-col h-full">
                 {dataPropose.map((item) => (
@@ -74,11 +72,11 @@ const Search = () => {
               {/* <Searchresult /> */}
             </PoperWrapper>
           ) : (
-            <PoperWrapper isScroll={true} height="550px">
+            <PoperWrapper>
               <div className="pb-5">
                 <h4 className="mb-3 text-sm font-bold">Nghệ sĩ</h4>
                 <div className="flex flex-col h-full gap-2">
-                  {loading ? (
+                  {loadingSearch ? (
                     <div className="flex items-center justify-center">
                       <Loading />
                     </div>
@@ -95,7 +93,7 @@ const Search = () => {
               </div>
               <div>
                 <h4 className="mb-3 text-sm font-bold">Gợi ý kết quả</h4>
-                <Searchresult data={songs} />
+                <SearchResult data={songs} />
               </div>
             </PoperWrapper>
           )}

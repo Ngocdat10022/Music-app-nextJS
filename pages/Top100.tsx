@@ -9,7 +9,7 @@ import { MusicContext, MusicContextProvider } from "../context/MusicContext";
 import { getTop100 } from "../service/api";
 
 const Top100 = ({ data }: { data: any }) => {
-  console.log("data", data.data);
+  // console.log("data", data.data);
   const dataOutstanding: IDataMusicSpring[] = data.data[0]?.items;
   const dataVietNamese: IDataMusicSpring[] = data.data[1]?.items;
   const dataAsia: IDataMusicSpring[] = data.data[2]?.items;
@@ -28,7 +28,7 @@ const Top100 = ({ data }: { data: any }) => {
           <List>
             {dataOutstanding.length > 0 &&
               dataOutstanding.map((item) => {
-                return <CardItem key={item.encodeId} item={item} />;
+                return <CardItem key={item?.encodeId} item={item} />;
               })}
           </List>
         </div>
@@ -37,7 +37,7 @@ const Top100 = ({ data }: { data: any }) => {
           <List>
             {dataVietNamese.length > 0 &&
               dataVietNamese.map((item) => {
-                return <CardItem key={item.encodeId} item={item} />;
+                return <CardItem key={item?.encodeId} item={item} />;
               })}
           </List>
         </div>
@@ -46,7 +46,7 @@ const Top100 = ({ data }: { data: any }) => {
           <List>
             {dataAsia.length > 0 &&
               dataAsia.map((item) => {
-                return <CardItem key={item.encodeId} item={item} />;
+                return <CardItem key={item?.encodeId} item={item} />;
               })}
           </List>
         </div>
@@ -55,7 +55,7 @@ const Top100 = ({ data }: { data: any }) => {
           <List>
             {dataUsUk.length > 0 &&
               dataUsUk.map((item) => {
-                return <CardItem key={item.encodeId} item={item} />;
+                return <CardItem key={item?.encodeId} item={item} />;
               })}
           </List>
         </div>
@@ -64,7 +64,7 @@ const Top100 = ({ data }: { data: any }) => {
           <List>
             {dataSymphony.length > 0 &&
               dataSymphony.map((item) => {
-                return <CardItem key={item.encodeId} item={item} />;
+                return <CardItem key={item?.encodeId} item={item} />;
               })}
           </List>
         </div>

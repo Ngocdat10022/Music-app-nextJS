@@ -6,22 +6,23 @@ import Swal from "sweetalert2";
 import "animate.css";
 import { usePlaySong } from "../../../../hooks/usePlaySong";
 interface PropsBannerItem {
-  banner: any;
+  databanner: any;
+  type: number;
 }
-const BannerItem = ({ banner }: PropsBannerItem) => {
-  const handlePlaySong = usePlaySong();
-  return banner?.type === 4 ? (
-    <div className="overflow-hidden rounded-2xl">
-      <Link href={`/playlist/${banner?.encodeId}`}>
+const BannerItem = ({ databanner, type }: PropsBannerItem) => {
+  const { handlePlaySong } = usePlaySong();
+  return type === 4 ? (
+    <div className="overflow-hidden rounded-2xl ">
+      <Link href={`/playlist/${databanner.encodeId}`}>
         <img
-          width="100%"
-          height="100%"
-          src={`${banner?.banner}`}
+          width={`100%`}
+          height={`100%`}
+          src={`${databanner.banner}`}
           alt="avatar"
         />
       </Link>
     </div>
-  ) : banner?.type === 1 ? (
+  ) : type === 1 ? (
     <div
       className="overflow-hidden cursor-pointer rounded-2xl"
       onClick={() => {
@@ -43,16 +44,26 @@ const BannerItem = ({ banner }: PropsBannerItem) => {
         }).then(async (result) => {
           if (result.isConfirmed) {
             // Swal.fire("Deleted!", "Your file has been deleted.", "success");
-            handlePlaySong(banner.encodeId, banner?.streamingStatus);
+            handlePlaySong(databanner.encodeId, databanner?.streamingStatus, 0);
           }
         });
       }}
     >
-      <img width="100%" height="100%" src={`${banner?.banner}`} alt="avatar" />
+      <img
+        width="100%"
+        height="100%"
+        src={`${databanner?.banner}`}
+        alt="avatar"
+      />
     </div>
   ) : (
     <div className="overflow-hidden cursor-pointer rounded-2xl">
-      <img width="100%" height="100%" src={`${banner?.banner}`} alt="avatar" />
+      <img
+        width="100%"
+        height="100%"
+        src={`${databanner?.banner}`}
+        alt="avatar"
+      />
     </div>
   );
 };

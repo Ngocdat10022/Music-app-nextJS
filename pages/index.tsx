@@ -1,27 +1,30 @@
 import { Inter } from "@next/font/google";
-import { lazy, useState } from "react";
-import ContainerHome from "../components/ContainerHome";
+import { useState } from "react";
+import dynamic from "next/dynamic";
 import { HomeContext } from "../context/HomeContext";
 import { MusicContextProvider } from "../context/MusicContext";
-const Layout = lazy(() => import("../components/Layout"));
+const Layout = dynamic(() => import("../components/Layout"));
+const ContainerHome = dynamic(() => import("../components/ContainerHome"));
 import {
   IArtistsTrending,
-  IDataBanner,
+  IDataBannerPlayList,
   IDataMusicSpring,
   IDataNewRelease,
 } from "../constant/interface";
 import { getDataHome, getTop100 } from "../service/api";
 import Toast from "../components/Toast";
+
 const inter = Inter({ subsets: ["latin"] });
 interface Props {
-  dataBannerHome: IDataBanner[];
+  dataBannerHome: IDataBannerPlayList[];
   dataHome: [];
   dataMusicSpring: [];
-  dataNewRelease: {};
+  dataNewRelease: IDataNewRelease;
   dataArtistsTrending: IArtistsTrending[];
   dataNewDayMusic: IDataMusicSpring[];
   dataConner: IDataMusicSpring[];
   dataTop100: {}[];
+  dataTitle: {}[];
 }
 export default function Home({
   dataBannerHome,
@@ -32,9 +35,14 @@ export default function Home({
   dataNewDayMusic,
   dataConner,
   dataTop100,
+  dataTitle,
 }: Props) {
   const dataNewReleases = [{ ...dataNewRelease }];
-  const [dataBanner, setDataBanner] = useState<IDataBanner[]>(dataBannerHome);
+  // const dataConvert = dataNewReleases.map((item: any, index) => {
+  //   return item.all;
+  // });
+  const [dataBanner, setDataBanner] =
+    useState<IDataBannerPlayList[]>(dataBannerHome);
   const [musicSpring, setMusicSpring] =
     useState<IDataMusicSpring[]>(dataMusicSpring);
   const [newRelease, setNewRelease] =
@@ -44,7 +52,11 @@ export default function Home({
   const [newDayMusic, setNewDayMusic] =
     useState<IDataMusicSpring[]>(dataNewDayMusic);
   const [conner, setConner] = useState<IDataMusicSpring[]>(dataConner);
-  console.log("data", dataTop100, dataHome);
+  const [dataTitles, setDataTitles] = useState(dataTitle);
+  // console.log("dataNewReldataNewReleasesease", dataNewReleases);
+  // console.log("dataConvert", dataConvert);
+  // console.log("data", dataTop100, dataHome);
+  // console.log("dataTitle", dataTitle);
   // const [allArrayData, setAllArrayData] = useState([]);
 
   // const dataAll = [...dataHome?.data?.items, ...dataTop100?.data];
@@ -81,6 +93,7 @@ export default function Home({
           artistsTrending,
           newDayMusic,
           conner,
+          dataTitles,
         }}
       >
         <MusicContextProvider>
@@ -99,20 +112,15 @@ export const getStaticProps = async () => {
     getDataHome(1),
     getTop100(),
   ]);
-  // const dataBannerHome = dataHome?.data.items[0].items;
-  // const dataMusicSpring = dataHome?.data.items[4].items;
-  // const dataArtistsTrending = dataHome?.data.items[5].items;
-  // const dataNewRelease = dataHome?.data.items[3].items;
-  // const dataNewDayMusic = dataHome?.data.items[7].items;
-  // const dataConner = dataHome?.data.items[13].items;
 
   const data = dataHome?.data?.items.filter((item: any) => {
     return (
-      item?.sectionType === "new-release" ||
       item?.sectionType === "banner" ||
+      item?.sectionType === "new-release" ||
       item?.sectionType === "playlist"
     );
   });
+  // banner new-release
   const dataBannerHome = data[0].items;
   const dataNewRelease = data[1].items;
   const dataMusicSpring = data[2].items;
@@ -120,6 +128,9 @@ export const getStaticProps = async () => {
   const dataNewDayMusic = data[4].items;
   const dataConner = data[6].items;
 
+  const dataTitle = data.filter((itemTitle: any) => {
+    return itemTitle.title;
+  });
   return {
     props: {
       dataHome,
@@ -130,6 +141,7 @@ export const getStaticProps = async () => {
       dataNewDayMusic,
       dataConner,
       dataTop100,
+      dataTitle,
     },
   };
 };

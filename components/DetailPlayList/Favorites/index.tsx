@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 
 const Favorites = ({ children }: { children: string }) => {
   return (
@@ -8,4 +8,4 @@ const Favorites = ({ children }: { children: string }) => {
   );
 };
 
-export default Favorites;
+export default memo(Favorites);

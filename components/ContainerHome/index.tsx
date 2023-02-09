@@ -2,13 +2,24 @@ import React, { useContext, useState } from "react";
 import { HomeContext } from "../../context/HomeContext";
 import List from "../ListMusic";
 import Title from "../Title";
-import Banner from "./Banner";
+// import Banner from "./Banner";
 import SongNewRelesea from "./SongNewRelesea";
 import CardItem from "../CardItem";
-
+import dynamic from "next/dynamic";
+import { NextMusixEffect } from "../../constant/globalFunc";
+const Banner = dynamic(() => import("./Banner"));
+// const Title = dynamic(() => import("../Title"));
+// const SongNewRelesea = dynamic(() => import("./SongNewRelesea"));
+// const CardItem = dynamic(() => import("../CardItem"));
 const ContainerHome = () => {
-  const { musicSpring, newRelease, artistsTrending, newDayMusic, conner } =
-    useContext(HomeContext);
+  const {
+    musicSpring,
+    newRelease,
+    artistsTrending,
+    newDayMusic,
+    conner,
+    dataTitles,
+  } = useContext(HomeContext);
   const dataNewRelease = newRelease[0];
   const dataNewReleaseAll = dataNewRelease?.all;
   const dataNewReleaseOrthers = dataNewRelease?.others;
@@ -30,19 +41,24 @@ const ContainerHome = () => {
       title: "QUỐC TẾ",
     },
   ];
+  const listTitle = dataTitles.map((item: any) => {
+    return item.title;
+  });
+  // console.log("listTitle", listTitle);
   const [tab, setTab] = useState(dataNav[0].title);
   const [allData, setAllData] = useState(dataNewReleaseAll);
+  NextMusixEffect(allData);
   return (
     <div>
       <Banner />
-      <Title>Khởi Động Ngày Mới</Title>
+      <Title>{listTitle[1]}</Title>
       <List>
         {musicSpring.length &&
           musicSpring.map((item) => {
-            return <CardItem key={item.uid} item={item} />;
+            return <CardItem key={item.encodeId} item={item} />;
           })}
       </List>
-      <Title>Mới Phát Hành</Title>
+      <Title>{listTitle[0]}</Title>
       <div>
         <div className="flex items-center gap-5">
           {dataNav.map((item) => {
@@ -68,14 +84,18 @@ const ContainerHome = () => {
         </div>
         <div className="grid grid-cols-3 gap-2 mt-4 max-lg:grid-cols-2 max-sm:grid-cols-1">
           {allData.length > 0 &&
-            allData.map((songItem) => {
+            allData.map((songItem, index) => {
               return (
-                <SongNewRelesea key={songItem.encodeId} songItem={songItem} />
+                <SongNewRelesea
+                  key={songItem.encodeId}
+                  songItem={songItem}
+                  index={index}
+                />
               );
             })}
         </div>
       </div>
-      <Title>Nghệ Sĩ Thịnh Hành 🔥</Title>
+      <Title>{listTitle[2]}</Title>
       <div className="mt-5">
         <List>
           {artistsTrending.length > 0 &&
@@ -84,7 +104,7 @@ const ContainerHome = () => {
             })}
         </List>
       </div>
-      <Title>Nhạc Mới Mỗi Ngày 🔥</Title>
+      <Title>{listTitle[3]}</Title>
       <div className="mt-5">
         <List>
           {newDayMusic.length > 0 &&
@@ -93,7 +113,7 @@ const ContainerHome = () => {
             })}
         </List>
       </div>
-      <Title>XONE CORNER</Title>
+      <Title>{listTitle[4]}</Title>
       <div className="mt-5">
         <List>
           {conner.length > 0 &&

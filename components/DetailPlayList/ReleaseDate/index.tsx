@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 
 const ReleaseDate = ({ children }: { children: string }) => {
   return (
@@ -8,4 +8,4 @@ const ReleaseDate = ({ children }: { children: string }) => {
   );
 };
 
-export default ReleaseDate;
+export default memo(ReleaseDate);

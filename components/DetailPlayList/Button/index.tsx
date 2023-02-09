@@ -1,13 +1,22 @@
-import React from "react";
+import React, { memo } from "react";
 import PauseIcon from "../../../assets/Icons/PauseIcon";
 
-const Button = ({ children }: { children: string }) => {
+const Button = ({
+  children,
+  onClick,
+}: {
+  children: string;
+  onClick: () => void;
+}) => {
   return (
-    <button className="flex items-center justify-center gap-2 bg-primary rounded-3xl w-[200px] h-[36px]">
+    <button
+      onClick={onClick}
+      className="flex items-center justify-center gap-2 bg-primary rounded-3xl w-[200px] h-[36px]"
+    >
       <PauseIcon />
       {children}
     </button>
   );
 };
 
-export default Button;
+export default memo(Button);

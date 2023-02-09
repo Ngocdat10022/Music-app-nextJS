@@ -63,7 +63,7 @@ const NAV_TWO: Nav[] = [
     id: 7,
     title: "Mv",
     icon: <Mv />,
-    to: "Mv",
+    to: "/Mv",
   },
   {
     id: 8,
@@ -74,23 +74,9 @@ const NAV_TWO: Nav[] = [
 ];
 const SiderBar = () => {
   const [isWidth, setIsWidth] = useState<boolean>(true);
-  const [active, setActive] = useState<number>(0);
   const handleWidthSiderBar = () => {
     setIsWidth(!isWidth);
   };
-  ("	https://zjs.zmdcdn.me/zmp3-desktop/releases/v1.8.22/static/media/icon_zing_mp3_60.f6b51045.svg");
-
-  useEffect(() => {
-    // NAV_TWO[0].title === "#Zingchart"
-    //   ? setActive(5)
-    //   : NAV_TWO[1].title === "Top100"
-    //   ? setActive(6)
-    //   : NAV_TWO[2].title === "Mv"
-    //   ? setActive(7)
-    //   : NAV_TWO[3].title === "Nhạc Mới"
-    //   ? setActive(8)
-    //   : setActive(0);
-  }, []);
   return (
     <div
       className={`siderbar-container py-2 ${
@@ -124,13 +110,9 @@ const SiderBar = () => {
           <ul>
             {NAV_ONE.map((item) => {
               return (
-                <li
-                  key={item.title}
-                  className={`${item.id === active ? "active" : ""}`}
-                  onClick={() => setActive(item.id)}
-                >
+                <li key={item.title}>
                   <Link
-                    href="/"
+                    href={`${item.to}`}
                     className="flex items-center gap-3 px-6 py-2 text-[12px] font-bold text-text1 hover:text-white"
                   >
                     <span>{item.icon}</span>
@@ -152,19 +134,19 @@ const SiderBar = () => {
           style={{
             width: "100%",
           }}
+          options={{
+            suppressScrollX: true,
+          }}
+          className="scrollbar"
         >
-          <div className="relative flex  flex-col pb-[54px] mt-4 ">
+          <div className="relative flex items-center flex-col pb-[54px] mt-4 poper-scroll ">
             <nav className="relative w-full ">
               <ul>
                 {NAV_TWO.map((item) => {
                   return (
-                    <li
-                      key={item.title}
-                      className={`${item.id === active ? "active" : ""}`}
-                      onClick={() => setActive(item.id)}
-                    >
+                    <li key={item.title}>
                       <Link
-                        href={`/${item.to}`}
+                        href={`${item.to}`}
                         className="flex items-center gap-3 px-6 py-2 text-[12px] font-bold text-text1 hover:text-white"
                       >
                         <span>{item.icon}</span>

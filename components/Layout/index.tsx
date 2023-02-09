@@ -1,19 +1,17 @@
 import Head from "next/head";
-import React, { lazy, useContext, useEffect } from "react";
-import { MusicContext, MusicContextProvider } from "../../context/MusicContext";
+import React, { useContext, useEffect } from "react";
+import { MusicContext } from "../../context/MusicContext";
 import { getInfoSong, getTheSong } from "../../service/api";
 import { getCookiesSongId } from "../../utils/musicCookie";
 import Header from "../Header";
 import PlayMusic from "../PlayMusic";
 import SiderBar from "../SiderBar";
-// const Header = lazy(() => import("../Header"));
-// const PlayMusic = lazy(() => import("../PlayMusic"));
-// const SiderBar = lazy(() => import("../SiderBar"));
+import Toast from "../Toast";
 interface Props {
   children?: React.ReactNode;
 }
 const Layout = ({ children }: Props) => {
-  const { linkPlay, setLinkPlay, setAutoPlay, setInfoSong } =
+  const { linkPlay, setLinkPlay, setAutoPlay, setInfoSong, setLoadingSong } =
     useContext(MusicContext);
   useEffect(() => {
     if (linkPlay) {
@@ -23,31 +21,38 @@ const Layout = ({ children }: Props) => {
       const songId = getCookiesSongId();
       if (songId) {
         const refreshLinkPlay = async () => {
-          // const dataSong = await getTheSong(songId);
-          const [dataSong, dataInfoSong] = await Promise.all([
-            getTheSong(songId),
-            getInfoSong(songId),
-          ]);
-          if (dataSong.status === 200) {
-            // console.log("dataSong", dataSong);
-            // console.log("dataInfoSong", dataInfoSong);
-            if (dataSong.data.data && dataInfoSong.data) {
-              // console.log("dataSong", dataSong.data.data["128"]);
-              setLinkPlay(dataSong.data.data["128"]);
-              setAutoPlay(false);
-              const title =
-                dataInfoSong.data?.title || dataInfoSong.data.album?.title;
-              const nameArtists = dataInfoSong.data?.artistsNames;
-              const urlImage = dataInfoSong.data?.thumbnailM;
-              setInfoSong([
-                {
-                  title,
-                  nameArtists,
-                  urlImage,
-                },
-              ]);
+          setLoadingSong(true);
+          try {
+            const [dataSong, dataInfoSong] = await Promise.all([
+              getTheSong(songId),
+              getInfoSong(songId),
+            ]);
+            if (dataSong.status === 200) {
+              // console.log("dataSong", dataSong);
+              // console.log("dataInfoSong", dataInfoSong);
+              if (dataSong.data.data && dataInfoSong.data) {
+                // console.log("dataSong", dataSong.data.data["128"]);
+                setLinkPlay(dataSong.data.data["128"]);
+                setAutoPlay(false);
+                const title =
+                  dataInfoSong.data?.title || dataInfoSong.data.album?.title;
+                const nameArtists = dataInfoSong.data?.artistsNames;
+                const urlImage = dataInfoSong.data?.thumbnailM;
+                setInfoSong([
+                  {
+                    title,
+                    nameArtists,
+                    urlImage,
+                  },
+                ]);
+                setLoadingSong(false);
+              }
             }
+          } catch (error) {
+            console.log("error", error);
+            setLoadingSong(false);
           }
+          // const dataSong = await getTheSong(songId);
         };
         refreshLinkPlay();
       }
@@ -67,6 +72,7 @@ const Layout = ({ children }: Props) => {
         {children}
       </div>
       <PlayMusic></PlayMusic>
+      <Toast />
     </>
   );
 };

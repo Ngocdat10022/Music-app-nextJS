@@ -1,13 +1,14 @@
-import React, { memo, useContext } from "react";
+import React, { memo, useContext, useState } from "react";
 import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
-import { MusicContext } from "../../../context/MusicContext";
+import { usePlaySong } from "../../../hooks/usePlaySong";
 interface IPropsAudio {
   linkPlay: string;
   autoPlay: boolean;
 }
 const Audio = ({ linkPlay, autoPlay }: IPropsAudio) => {
-  //   const { linkPlay, autoPlay } = useContext(MusicContext);
+  const { handleNextSong, handlePrevSong } = usePlaySong();
+
   return (
     <AudioPlayer
       style={{
@@ -18,8 +19,10 @@ const Audio = ({ linkPlay, autoPlay }: IPropsAudio) => {
       }}
       autoPlay={autoPlay}
       src={linkPlay}
-      onPlay={() => console.log("autoPlay")}
-      // other props here
+      onClickNext={handleNextSong}
+      showSkipControls
+      onClickPrevious={handlePrevSong}
+      onEnded={handleNextSong}
     />
   );
 };

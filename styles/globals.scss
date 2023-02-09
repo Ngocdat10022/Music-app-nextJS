@@ -71,15 +71,24 @@
   .border-none {
     border: none;
   }
-  .ps > .ps__rail-y:hover {
+  // custom PerfectScrollbar
+  .scrollbar .ps__rail-y:hover {
     background: transparent !important;
     width: 0px !important;
-    height: 0 !important;
+    height: 0px !important;
   }
 
-  .ps__thumb-y {
+  .scrollbar .ps__thumb-y {
+    background-color: #706d6d;
     width: 4px !important;
   }
+
+  .scrollbar .ps__rail-y {
+    background: transparent !important;
+    width: 0px !important;
+    height: 0px !important;
+  }
+
   .scrollbar-container {
     width: 100% !important;
     height: calc(100% - 54px) !important;
@@ -93,14 +102,6 @@
   .bg-transparent {
     background: transparent;
   }
-  // .poper-scroll {
-  //   ::-webkit-scrollbar-thumb {
-  //     background-color: #624de5;
-  //   }
-  // }
-  // .poper-wrapper {
-  //   max-height: calc(100vh - 30vh);
-  // }
   .poper-scroll::-webkit-scrollbar {
     width: 6px;
     height: 6px;
@@ -148,8 +149,13 @@
   .animation-search-mobile {
     transition: all 0.5s;
   }
+  .wrapper-img-music-item img {
+    transition: transform 0.8s;
+  }
   .wrapper-img-music-item:hover img {
     transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    -webkit-transform: scale(1.2);
     cursor: pointer;
     transition: all 0.5s;
   }

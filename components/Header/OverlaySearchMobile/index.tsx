@@ -1,8 +1,6 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, memo } from "react";
 import Close from "../../../assets/Icons/Close";
 import { MusicContext } from "../../../context/MusicContext";
-import UseDebounce from "../../../hooks/useDebounce";
-import { getSearch } from "../../../service/api";
 import Loading from "../../Loading";
 import ArtisItem from "../Search/Poper/ArtistItem";
 import MusicItem from "../Search/Poper/SongItem";
@@ -10,7 +8,7 @@ interface Props {
   showSearchMobile: boolean;
 }
 const SearchMobile = ({ showSearchMobile = false }: Props) => {
-  const { searchValue, setSearchValue, songs, artists, loading } =
+  const { searchValue, setSearchValue, songs, artists, loadingSearch } =
     useContext(MusicContext);
   return (
     <div
@@ -37,11 +35,11 @@ const SearchMobile = ({ showSearchMobile = false }: Props) => {
         ) : (
           searchValue && <h1 className="w-full">Không tìm thấy kết quả</h1>
         )} */}
-        {!loading &&
+        {!loadingSearch &&
           songs.length <= 0 &&
           artists.length <= 0 &&
           searchValue && <h1 className="w-full">Không tìm thấy kết quả</h1>}
-        {loading && searchValue ? (
+        {loadingSearch && searchValue ? (
           <div className="flex items-center justify-center">
             <Loading />
           </div>
@@ -51,8 +49,8 @@ const SearchMobile = ({ showSearchMobile = false }: Props) => {
               <div className="flex flex-col ">
                 <h1 className="my-2">nghệ sĩ</h1>
                 {artists.length > 0 &&
-                  artists.map((artist: any) => {
-                    return <ArtisItem key={artist?.encodeId} data={artist} />;
+                  artists.map((artist: any, index) => {
+                    return <ArtisItem key={index} data={artist} />;
                   })}
               </div>
             )}
@@ -60,8 +58,8 @@ const SearchMobile = ({ showSearchMobile = false }: Props) => {
               <div className="flex flex-col ">
                 <h1 className="my-2">Bài hát</h1>
                 {songs.length > 0 &&
-                  songs.map((song: any) => {
-                    return <MusicItem key={song?.encodeId} song={song} />;
+                  songs.map((song: any, index) => {
+                    return <MusicItem key={index} song={song} index={index} />;
                   })}
               </div>
             )}
@@ -72,4 +70,4 @@ const SearchMobile = ({ showSearchMobile = false }: Props) => {
   );
 };
 
-export default SearchMobile;
+export default memo(SearchMobile);

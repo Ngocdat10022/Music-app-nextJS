@@ -3,6 +3,9 @@ import UseDebounce from "../hooks/useDebounce";
 import { getInfoSong, getSearch, getTheSong } from "../service/api";
 import { IInfoSong, IMsuicSongs, IMusicArtist } from "../constant/interface";
 import { sleep } from "../constant/globalFunc";
+import { useLoading } from "../hooks/useLoading";
+import { toast } from "react-toastify";
+import { usePlaySong } from "../hooks/usePlaySong";
 interface Props {
   children: React.ReactNode;
 }
@@ -22,8 +25,12 @@ interface IMusicContext {
   setEncodeId: React.Dispatch<React.SetStateAction<string>>;
   infoSong: IInfoSong[];
   setInfoSong: React.Dispatch<React.SetStateAction<IInfoSong[]>>;
-  loading: boolean;
-  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  loadingSearch: boolean;
+  setLoadingSearch: React.Dispatch<React.SetStateAction<boolean>>;
+  loadingSong: boolean;
+  setLoadingSong: React.Dispatch<React.SetStateAction<boolean>>;
+  indexSong: number;
+  setIndexSong: React.Dispatch<React.SetStateAction<number>>;
 }
 const MusicDefaultData = {
   songs: [],
@@ -41,8 +48,12 @@ const MusicDefaultData = {
   setEncodeId: () => {},
   infoSong: [],
   setInfoSong: () => {},
-  loading: true,
-  setLoading: () => {},
+  loadingSearch: false,
+  setLoadingSearch: () => {},
+  loadingSong: false,
+  setLoadingSong: () => {},
+  indexSong: 0,
+  setIndexSong: () => {},
 };
 export const MusicContext = createContext<IMusicContext>(MusicDefaultData);
 export const MusicContextProvider = ({ children }: Props) => {
@@ -56,24 +67,30 @@ export const MusicContextProvider = ({ children }: Props) => {
   const [autoPlay, setAutoPlay] = useState<boolean>(MusicDefaultData.autoPlay);
   const [linkPlay, setLinkPlay] = useState<string>(MusicDefaultData.linkPlay);
   const [encodeId, setEncodeId] = useState<string>(MusicDefaultData.encodeId);
-  const [loading, setLoading] = useState<boolean>(MusicDefaultData.loading);
+  const [indexSong, setIndexSong] = useState<number>(
+    MusicDefaultData.indexSong
+  );
+  const { loading: loadingSearch, setLoading: setLoadingSearch } =
+    useLoading(false);
+  const { loading: loadingSong, setLoading: setLoadingSong } =
+    useLoading(false);
   const [infoSong, setInfoSong] = useState<IInfoSong[]>(
     MusicDefaultData.infoSong
   );
   const debouncedValue = UseDebounce(searchValue, 500);
-  // console.log("linkPlay", linkPlay);
+
   // console.log("infoSong", infoSong);
   useEffect(() => {
     const fetchSongSearch = async () => {
+      setLoadingSearch(true);
       const result = await getSearch(debouncedValue);
-      setLoading(true);
-      await sleep(2000);
+      // await sleep(2000);
       if (result.data.songs && result.data.artists) {
-        setLoading(false);
+        setLoadingSearch(false);
         setSongs(result.data.songs || []);
         setArtists(result.data.artists || []);
       } else {
-        setLoading(false);
+        setLoadingSearch(false);
         setArtists([]);
         setSongs([]);
       }
@@ -84,31 +101,44 @@ export const MusicContextProvider = ({ children }: Props) => {
 
   useEffect(() => {
     const fetchSong = async () => {
-      // const dataSong = await getTheSong(encodeId);
-      const [dataSong, dataInfoSong] = await Promise.all([
-        getTheSong(encodeId),
-        getInfoSong(encodeId),
-      ]);
-      if (dataSong.status === 200) {
-        // console.log("dataSong", dataSong);
-        // console.log("dataInfoSong", dataInfoSong);
-        if (dataSong.data.data && dataInfoSong.data) {
-          const title =
-            dataInfoSong.data?.title || dataInfoSong.data.album?.title;
-          const nameArtists = dataInfoSong.data?.artistsNames;
-          const urlImage = dataInfoSong.data?.thumbnailM;
-          setLinkPlay(dataSong.data.data["128"]);
-          setInfoSong([
-            {
-              title,
-              nameArtists,
-              urlImage,
-            },
-          ]);
+      setLoadingSong(true);
+      try {
+        const [dataSong, dataInfoSong] = await Promise.all([
+          getTheSong(encodeId),
+          getInfoSong(encodeId),
+        ]);
+        if (dataSong.status === 200) {
+          // console.log("dataSong", dataSong);
+          // console.log("dataInfoSong", dataInfoSong);
+          if (dataSong.data.err === -1110) {
+            toast.error(`${dataSong.data.msg}`);
+            setLoadingSong(false);
+            setIndexSong(indexSong + 1);
+          }
+          if (dataSong.data.data && dataInfoSong.data) {
+            const title =
+              dataInfoSong.data?.title || dataInfoSong.data.album?.title;
+            const nameArtists = dataInfoSong.data?.artistsNames;
+            const urlImage = dataInfoSong.data?.thumbnailM;
+            setLinkPlay(dataSong.data.data["128"]);
+            setInfoSong([
+              {
+                title,
+                nameArtists,
+                urlImage,
+              },
+            ]);
+            setLoadingSong(false);
+          }
         }
+      } catch (error) {
+        setLoadingSong(false);
+        console.log("error", error);
       }
+      // const dataSong = await getTheSong(encodeId);
     };
     fetchSong();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [encodeId]);
 
   return (
@@ -129,8 +159,12 @@ export const MusicContextProvider = ({ children }: Props) => {
         setEncodeId,
         infoSong,
         setInfoSong,
-        loading,
-        setLoading,
+        loadingSearch,
+        setLoadingSearch,
+        loadingSong,
+        setLoadingSong,
+        indexSong,
+        setIndexSong,
       }}
     >
       {children}
