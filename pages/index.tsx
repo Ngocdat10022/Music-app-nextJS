@@ -77,14 +77,14 @@ export default function Home({
 
   // console.log("allDatas", allDatas);
 
-  // const dataH = dataHome?.data?.items.filter((item: any) => {
-  //   return (
-  //     item?.sectionType === "new-release" ||
-  //     item?.sectionType === "banner" ||
-  //     item?.sectionType === "playlist"
-  //   );
-  // });
-  // console.log("dataH", dataH);
+  const dataH = dataHome?.data?.items.filter((item: any) => {
+    return (
+      item?.sectionType === "new-release" ||
+      item?.sectionType === "banner" ||
+      item?.sectionType === "playlist"
+    );
+  });
+  console.log("dataH", dataH);
 
   return (
     <div className="app">

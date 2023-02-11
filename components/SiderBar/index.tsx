@@ -17,36 +17,36 @@ import "react-perfect-scrollbar/dist/css/styles.css";
 const NAV_ONE: Nav[] = [
   {
     id: 0,
-    title: "Cá Nhân",
-    icon: <Personal />,
-    to: "/",
-  },
-  {
-    id: 1,
     title: "Khám Phá",
     icon: <Discover />,
     to: "/",
   },
   {
-    id: 2,
+    id: 1,
     title: "Thể Loại",
     icon: <Category />,
     to: "/",
   },
   {
-    id: 3,
+    id: 2,
     title: "Radio",
     icon: <Radio />,
     to: "/",
   },
   {
-    id: 4,
+    id: 3,
     title: "Theo Dõi",
     icon: <Follow />,
     to: "/",
   },
 ];
 const NAV_TWO: Nav[] = [
+  {
+    id: 4,
+    title: "Trang Chủ",
+    icon: <Personal />,
+    to: "/",
+  },
   {
     id: 5,
     title: "#Zingchart",
@@ -108,7 +108,7 @@ const SiderBar = () => {
       <div className="flex flex-col items-center overflow-y-scroll nav-container poper-scroll">
         <nav className="relative w-full">
           <ul>
-            {NAV_ONE.map((item) => {
+            {NAV_TWO.map((item) => {
               return (
                 <li key={item.title}>
                   <Link
@@ -142,7 +142,7 @@ const SiderBar = () => {
           <div className="relative flex items-center flex-col pb-[54px] mt-4 poper-scroll ">
             <nav className="relative w-full ">
               <ul>
-                {NAV_TWO.map((item) => {
+                {NAV_ONE.map((item) => {
                   return (
                     <li key={item.title}>
                       <Link
