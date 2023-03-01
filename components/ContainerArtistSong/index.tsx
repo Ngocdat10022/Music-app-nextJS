@@ -1,6 +1,6 @@
-import React, { memo } from "react";
+import React, { memo, useEffect } from "react";
 import { NextMusixEffect } from "../../constant/globalFunc";
-import { IMusicChartNewRealesa } from "../../constant/interface";
+import { IMusicChartNewRealesa } from "../../interface/interface";
 import SongItem from "../DetailPlayList/Song";
 import Loading from "../Loading";
 import Title from "../Title";

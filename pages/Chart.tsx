@@ -1,8 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import ContainerChart from "../components/ContainerChart";
-import Layout from "../components/Layout";
-import { IMusicChartNewRealesa } from "../constant/interface";
-import { MusicContextProvider } from "../context/MusicContext";
+import { IMusicChartNewRealesa } from "../interface/interface";
 import { getMusicChart } from "../service/api";
 
 const Chart = ({
@@ -10,13 +8,7 @@ const Chart = ({
 }: {
   dataChartNewRealese: IMusicChartNewRealesa[];
 }) => {
-  return (
-    <MusicContextProvider>
-      <Layout>
-        <ContainerChart dataChartNewRealese={dataChartNewRealese} />
-      </Layout>
-    </MusicContextProvider>
-  );
+  return <ContainerChart dataChartNewRealese={dataChartNewRealese} />;
 };
 export const getStaticProps = async () => {
   const data = await getMusicChart();

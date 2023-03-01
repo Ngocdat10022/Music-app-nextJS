@@ -1,8 +1,7 @@
-import React, { useState, createContext, useEffect } from "react";
+import React, { useState, createContext, useEffect, useContext } from "react";
 import UseDebounce from "../hooks/useDebounce";
 import { getInfoSong, getSearch, getTheSong } from "../service/api";
-import { IInfoSong, IMsuicSongs, IMusicArtist } from "../constant/interface";
-import { sleep } from "../constant/globalFunc";
+import { IInfoSong, IMsuicSongs, IMusicArtist } from "../interface/interface";
 import { useLoading } from "../hooks/useLoading";
 import { toast } from "react-toastify";
 import { usePlaySong } from "../hooks/usePlaySong";
@@ -31,6 +30,7 @@ interface IMusicContext {
   setLoadingSong: React.Dispatch<React.SetStateAction<boolean>>;
   indexSong: number;
   setIndexSong: React.Dispatch<React.SetStateAction<number>>;
+  NextMusixEffect?: () => void;
 }
 const MusicDefaultData = {
   songs: [],
@@ -54,6 +54,7 @@ const MusicDefaultData = {
   setLoadingSong: () => {},
   indexSong: 0,
   setIndexSong: () => {},
+  NextMusixEffect: () => {},
 };
 export const MusicContext = createContext<IMusicContext>(MusicDefaultData);
 export const MusicContextProvider = ({ children }: Props) => {
@@ -79,12 +80,10 @@ export const MusicContextProvider = ({ children }: Props) => {
   );
   const debouncedValue = UseDebounce(searchValue, 500);
 
-  // console.log("infoSong", infoSong);
   useEffect(() => {
     const fetchSongSearch = async () => {
       setLoadingSearch(true);
       const result = await getSearch(debouncedValue);
-      // await sleep(2000);
       if (result.data.songs && result.data.artists) {
         setLoadingSearch(false);
         setSongs(result.data.songs || []);
@@ -98,6 +97,15 @@ export const MusicContextProvider = ({ children }: Props) => {
     fetchSongSearch();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debouncedValue]);
+  const NextMusixEffect = (data: any) => {
+    const { indexSong, setIndexSong } = useContext(MusicContext);
+    const { handlePlaySong } = usePlaySong();
+    useEffect(() => {
+      if (indexSong === data.length) setIndexSong(1);
+      const idNext = data[indexSong]?.encodeId;
+      handlePlaySong(idNext, data[indexSong]?.streamingStatus, indexSong);
+    }, [indexSong]);
+  };
 
   useEffect(() => {
     const fetchSong = async () => {
@@ -108,8 +116,6 @@ export const MusicContextProvider = ({ children }: Props) => {
           getInfoSong(encodeId),
         ]);
         if (dataSong.status === 200) {
-          // console.log("dataSong", dataSong);
-          // console.log("dataInfoSong", dataInfoSong);
           if (dataSong.data.err === -1110) {
             toast.error(`${dataSong.data.msg}`);
             setLoadingSong(false);
@@ -135,7 +141,6 @@ export const MusicContextProvider = ({ children }: Props) => {
         setLoadingSong(false);
         console.log("error", error);
       }
-      // const dataSong = await getTheSong(encodeId);
     };
     fetchSong();
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -2,17 +2,14 @@ import { Inter } from "@next/font/google";
 import { useState } from "react";
 import dynamic from "next/dynamic";
 import { HomeContext } from "../context/HomeContext";
-import { MusicContextProvider } from "../context/MusicContext";
-const Layout = dynamic(() => import("../components/Layout"));
 const ContainerHome = dynamic(() => import("../components/ContainerHome"));
 import {
   IArtistsTrending,
   IDataBannerPlayList,
   IDataMusicSpring,
   IDataNewRelease,
-} from "../constant/interface";
+} from "../interface/interface";
 import { getDataHome, getTop100 } from "../service/api";
-import Toast from "../components/Toast";
 
 const inter = Inter({ subsets: ["latin"] });
 interface Props {
@@ -38,9 +35,6 @@ export default function Home({
   dataTitle,
 }: Props) {
   const dataNewReleases = [{ ...dataNewRelease }];
-  // const dataConvert = dataNewReleases.map((item: any, index) => {
-  //   return item.all;
-  // });
   const [dataBanner, setDataBanner] =
     useState<IDataBannerPlayList[]>(dataBannerHome);
   const [musicSpring, setMusicSpring] =
@@ -53,39 +47,6 @@ export default function Home({
     useState<IDataMusicSpring[]>(dataNewDayMusic);
   const [conner, setConner] = useState<IDataMusicSpring[]>(dataConner);
   const [dataTitles, setDataTitles] = useState(dataTitle);
-  // console.log("dataNewReldataNewReleasesease", dataNewReleases);
-  // console.log("dataConvert", dataConvert);
-  console.log("dataHome", dataHome);
-  // console.log("dataTop100", dataTop100);
-  // console.log("dataTitle", dataTitle);
-  // const [allArrayData, setAllArrayData] = useState([]);
-
-  // const dataAll = [...dataHome?.data?.items, ...dataTop100?.data];
-  // const allDatas = dataAll
-  //   .filter((item) => {
-  //     return item?.sectionType === "playlist" || item.sectionType === "banner";
-  //   })
-  //   .map((item) => {
-  //     return item.items;
-  //   })
-  //   .reduce((acc: [], crr: []) => {
-  //     return acc.concat(crr);
-  //   }, [])
-  //   .filter((item: any) => {
-  //     return !(item.type === 1);
-  //   });
-
-  // console.log("allDatas", allDatas);
-
-  // const dataH = dataHome?.data?.items.filter((item: any) => {
-  //   return (
-  //     item?.sectionType === "new-release" ||
-  //     item?.sectionType === "banner" ||
-  //     item?.sectionType === "playlist"
-  //   );
-  // });
-  // console.log("dataH", dataH);
-
   return (
     <div className="app">
       <HomeContext.Provider
@@ -99,13 +60,7 @@ export default function Home({
           dataTitles,
         }}
       >
-        <MusicContextProvider>
-          <Layout>
-            <ContainerHome />
-            <Toast />
-          </Layout>
-        </MusicContextProvider>
-        {/* <PlayMusic /> */}
+        <ContainerHome />
       </HomeContext.Provider>
     </div>
   );

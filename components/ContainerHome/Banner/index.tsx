@@ -8,7 +8,6 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 const Banner = () => {
   const { dataBanner } = useContext(HomeContext);
-  // console.log("dataBanner", dataBanner);
   return (
     <Swiper
       className=" swiper-container"
@@ -21,7 +20,6 @@ const Banner = () => {
       navigation
       modules={[Navigation]}
     >
-      {/* <div className="grid grid-cols-3 md:grid-cols-2 max-sm:grid-cols-1"> */}
       {dataBanner.length > 0 &&
         dataBanner.map((banner) => {
           return (
@@ -30,7 +28,6 @@ const Banner = () => {
             </SwiperSlide>
           );
         })}
-      {/* </div> */}
     </Swiper>
   );
 };

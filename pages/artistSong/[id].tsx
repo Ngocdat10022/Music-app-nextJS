@@ -2,10 +2,7 @@
 import { useRouter } from "next/router";
 import React, { useCallback, useEffect, useState } from "react";
 import ContainerArtistSong from "../../components/ContainerArtistSong";
-import Layout from "../../components/Layout";
-import Toast from "../../components/Toast";
-import { IMusicChartNewRealesa } from "../../constant/interface";
-import { MusicContextProvider } from "../../context/MusicContext";
+import { IMusicChartNewRealesa } from "../../interface/interface";
 import { useLoading } from "../../hooks/useLoading";
 import { getArtistSong } from "../../service/api";
 
@@ -33,16 +30,13 @@ const ArtistSong = () => {
     setCount(count + 10);
   }, [count]);
   return (
-    <MusicContextProvider>
-      <Layout>
-        <ContainerArtistSong
-          artistSong={artistSong}
-          loadingSong={loadingSong}
-          onClick={handleSetCount}
-        />
-        <Toast />
-      </Layout>
-    </MusicContextProvider>
+    <>
+      <ContainerArtistSong
+        artistSong={artistSong}
+        loadingSong={loadingSong}
+        onClick={handleSetCount}
+      />
+    </>
   );
 };
 

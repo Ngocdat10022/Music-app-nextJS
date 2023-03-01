@@ -10,7 +10,7 @@ import MusicNew from "../../assets/Icons/MusicNew";
 import Star from "../../assets/Icons/Star";
 import Mv from "../../assets/Icons/Mv";
 import Category from "../../assets/Icons/Category";
-import { Nav } from "../../constant/interface";
+import { Nav } from "../../interface/interface";
 import CardSiderBar from "./CardSiderbar";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import "react-perfect-scrollbar/dist/css/styles.css";

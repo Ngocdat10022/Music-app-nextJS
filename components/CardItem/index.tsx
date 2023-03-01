@@ -10,7 +10,7 @@ const CardItem = ({ item }: { item: any }) => {
       key={item.uid}
       className="flex flex-col items-start justify-between gap-3"
     >
-      <Link href={`/playlist/${item.encodeId}`}>
+      <Link href={`/playlist/${item?.encodeId}`}>
         <div className="relative w-full h-[214px] lg:[h-150px] max-xl:[h-150px] max-maxsm:h-[120px]  max-sm:h-[150px] overflow-hidden rounded-md wrapper-img-music-item">
           <img
             className="w-full h-full "

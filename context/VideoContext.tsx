@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from "react";
-import { IVideoItem } from "../constant/interface";
+import { IVideoItem } from "../interface/interface";
 import { useLoading } from "../hooks/useLoading";
 import { getlistMV } from "../service/api";
 
@@ -29,7 +29,6 @@ export const VideoContext = createContext<IVideoContext>(valueVideoContext);
 
 export const VideoContextProvider = ({ children }: IPropVideoContext) => {
   const [listVideo, setListVideo] = useState<IVideoItem[]>([]);
-  // const [loading, setLoading] = useState<boolean>(false);
   const { loading: loadingVideo, setLoading: setLoadingVideo } =
     useLoading(false);
   const [linitIndex, setLimitIndex] = useState<number>(20);

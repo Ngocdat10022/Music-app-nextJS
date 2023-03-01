@@ -1,14 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import Layout from "../../components/Layout";
 import { Player } from "video-react";
 import "node_modules/video-react/dist/video-react.css";
-import { MusicContextProvider } from "../../context/MusicContext";
 import { getDetailVideo } from "../../service/api";
 import Title from "../../components/Title";
 import ListVideo from "../../components/ContainerListVideo/ListVideo";
-import { IVideoItem } from "../../constant/interface";
+import { IVideoItem } from "../../interface/interface";
 import VideoItem from "../../components/ContainerListVideo/VideoItem";
 import Loading from "../../components/Loading";
 const qualityList: {
@@ -58,64 +56,59 @@ const IdVideo = () => {
     })();
   }, [id, quality]);
   return (
-    <MusicContextProvider>
-      <Layout>
-        <div className="relative w-full">
-          <div className="flex items-center gap-4 mt-2 mb-2">
-            {info ? (
-              <>
-                <div className="overflow-hidden rounded-full w-[50px] h-[50px]">
-                  <img
-                    className="object-cover w-full h-full"
-                    src={`${info?.thumbnailM}`}
-                    alt={`${info?.thumbnailM}`}
-                  />
-                </div>
-                <div className="flex flex-col">
-                  <span className="font-bold text-white text-md">
-                    {info?.title}
-                  </span>
-                  <span className="text-sm text-text2">
-                    {info?.artistsNames}
-                  </span>
-                </div>
-              </>
-            ) : (
-              <Loading />
-            )}
-          </div>
-          <Player playsInline poster={`${info?.thumbnailM}`} src={linkVideo} />
-          <div className="flex items-center gap-3">
-            {qualityList.map((item, index) => {
-              return (
-                <div
-                  onClick={() => {
-                    setActive(item.id);
-                    setQuality(`${item?.title}`);
-                  }}
-                  key={item.id}
-                  className={`${
-                    item.id === active ? "text-primary" : ""
-                  } cursor-pointer`}
-                >
-                  {item.title}
-                </div>
-              );
-            })}
-          </div>
-          <div>
-            <Title>Video Liên Quan</Title>
-            <ListVideo>
-              {recommends.length > 0 &&
-                recommends.map((item) => {
-                  return <VideoItem key={item?.encodeId} data={item} />;
-                })}
-            </ListVideo>
-          </div>
+    <>
+      <div className="relative w-full">
+        <div className="flex items-center gap-4 mt-2 mb-2">
+          {info ? (
+            <>
+              <div className="overflow-hidden rounded-full w-[50px] h-[50px]">
+                <img
+                  className="object-cover w-full h-full"
+                  src={`${info?.thumbnailM}`}
+                  alt={`${info?.thumbnailM}`}
+                />
+              </div>
+              <div className="flex flex-col">
+                <span className="font-bold text-white text-md">
+                  {info?.title}
+                </span>
+                <span className="text-sm text-text2">{info?.artistsNames}</span>
+              </div>
+            </>
+          ) : (
+            <Loading />
+          )}
         </div>
-      </Layout>
-      ;
-    </MusicContextProvider>
+        <Player playsInline poster={`${info?.thumbnailM}`} src={linkVideo} />
+        <div className="flex items-center gap-3">
+          {qualityList.map((item, index) => {
+            return (
+              <div
+                onClick={() => {
+                  setActive(item.id);
+                  setQuality(`${item?.title}`);
+                }}
+                key={item.id}
+                className={`${
+                  item.id === active ? "text-primary" : ""
+                } cursor-pointer`}
+              >
+                {item.title}
+              </div>
+            );
+          })}
+        </div>
+        <div>
+          <Title>Video Liên Quan</Title>
+          <ListVideo>
+            {recommends.length > 0 &&
+              recommends.map((item) => {
+                return <VideoItem key={item?.encodeId} data={item} />;
+              })}
+          </ListVideo>
+        </div>
+      </div>
+    </>
   );
 };
 

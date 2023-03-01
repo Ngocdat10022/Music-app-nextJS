@@ -6,7 +6,6 @@ import { getCookiesSongId } from "../../utils/musicCookie";
 import Header from "../Header";
 import PlayMusic from "../PlayMusic";
 import SiderBar from "../SiderBar";
-import Toast from "../Toast";
 interface Props {
   children?: React.ReactNode;
 }
@@ -52,7 +51,6 @@ const Layout = ({ children }: Props) => {
             console.log("error", error);
             setLoadingSong(false);
           }
-          // const dataSong = await getTheSong(songId);
         };
         refreshLinkPlay();
       }
@@ -72,7 +70,6 @@ const Layout = ({ children }: Props) => {
         {children}
       </div>
       <PlayMusic></PlayMusic>
-      <Toast />
     </>
   );
 };

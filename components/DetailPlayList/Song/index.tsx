@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useContext, memo } from "react";
-import { ISongDetailPlayList } from "../../../constant/interface";
+import { ISongDetailPlayList } from "../../../interface/interface";
 import { MusicContext } from "../../../context/MusicContext";
 import { usePlaySong } from "../../../hooks/usePlaySong";
 import { formatTime } from "../../../utils/fomatTime";

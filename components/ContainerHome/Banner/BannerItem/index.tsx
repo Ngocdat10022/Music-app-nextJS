@@ -43,7 +43,6 @@ const BannerItem = ({ databanner, type }: PropsBannerItem) => {
           },
         }).then(async (result) => {
           if (result.isConfirmed) {
-            // Swal.fire("Deleted!", "Your file has been deleted.", "success");
             handlePlaySong(databanner.encodeId, databanner?.streamingStatus, 0);
           }
         });

@@ -1,8 +1,7 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
 import React, { useCallback } from "react";
-import { IMusicArtist, ISongDetailPlayList } from "../../constant/interface";
-
+import { IMusicArtist, ISongDetailPlayList } from "../../interface/interface";
 import { usePlaySong } from "../../hooks/usePlaySong";
 import Artists from "../DetailPlayList/Artisit";
 import Button from "../DetailPlayList/Button";
@@ -14,7 +13,6 @@ import TitleDetail from "../DetailPlayList/TitleDetail";
 import Title from "../Title";
 import { NextMusixEffect } from "../../constant/globalFunc";
 const DetaiPlayList = ({ data }: { data: any }) => {
-  //   console.log("dataDetailtPlayList", data.data);
   const dataDetailtPlayList = data.data;
   const dataSongs: ISongDetailPlayList[] = dataDetailtPlayList.song.items;
   const dataArtist: IMusicArtist[] = dataDetailtPlayList.artists;
@@ -25,7 +23,6 @@ const DetaiPlayList = ({ data }: { data: any }) => {
     const encodeId = dataSongs[randomIndex].encodeId;
     const streamStatus = dataSongs[randomIndex].streamingStatus;
     handlePlaySong(encodeId, streamStatus, randomIndex);
-    // console.log("randomIndex", randomIndex);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dataSongs.length]);
 

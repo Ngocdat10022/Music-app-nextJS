@@ -1,16 +1,12 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { HomeContext } from "../../context/HomeContext";
 import List from "../ListMusic";
 import Title from "../Title";
-// import Banner from "./Banner";
 import SongNewRelesea from "./SongNewRelesea";
 import CardItem from "../CardItem";
 import dynamic from "next/dynamic";
 import { NextMusixEffect } from "../../constant/globalFunc";
 const Banner = dynamic(() => import("./Banner"));
-// const Title = dynamic(() => import("../Title"));
-// const SongNewRelesea = dynamic(() => import("./SongNewRelesea"));
-// const CardItem = dynamic(() => import("../CardItem"));
 const ContainerHome = () => {
   const {
     musicSpring,
@@ -24,9 +20,6 @@ const ContainerHome = () => {
   const dataNewReleaseAll = dataNewRelease?.all;
   const dataNewReleaseOrthers = dataNewRelease?.others;
   const dataNewReleaseVpop = dataNewRelease?.vPop;
-  // console.log("dataNewReleaseAll", dataNewReleaseAll);
-  // console.log("dataNewReleaseOrthers", dataNewReleaseOrthers);
-  // console.log("dataNewReleaseVpop", dataNewReleaseVpop);
   const dataNav = [
     {
       id: 1,
@@ -44,7 +37,6 @@ const ContainerHome = () => {
   const listTitle = dataTitles.map((item: any) => {
     return item.title;
   });
-  // console.log("listTitle", listTitle);
   const [tab, setTab] = useState(dataNav[0].title);
   const [allData, setAllData] = useState(dataNewReleaseAll);
   NextMusixEffect(allData);

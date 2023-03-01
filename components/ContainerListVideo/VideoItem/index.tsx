@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
 import React, { memo } from "react";
-import { IVideoItem } from "../../../constant/interface";
+import { IVideoItem } from "../../../interface/interface";
 
 const VideoItem = ({ data }: { data: IVideoItem }) => {
   return (

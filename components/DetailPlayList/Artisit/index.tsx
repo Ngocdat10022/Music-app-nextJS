@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
 import React, { memo } from "react";
-import { IMusicArtist } from "../../../constant/interface";
+import { IMusicArtist } from "../../../interface/interface";
 
 const Artists = ({ artist }: { artist: IMusicArtist }) => {
   return (
