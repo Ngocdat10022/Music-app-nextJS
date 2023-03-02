@@ -14,7 +14,7 @@ const MusicItem = ({ song, index }: { song: any; index: number }) => {
     <>
       <div
         onClick={() => {
-          handlePlaySong(song.encodeId, song?.streamingStatus, index);
+          handlePlaySong(song.encodeId, song?.streamingStatus);
         }}
         className="flex items-center gap-2 p-2 cursor-pointer rounded-xl hover-bg"
       >

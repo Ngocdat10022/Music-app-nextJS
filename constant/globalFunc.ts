@@ -10,7 +10,7 @@ export const NextMusixEffect = (data: any) => {
   const { handlePlaySong } = usePlaySong();
   useEffect(() => {
     if (mounted) {
-      if (indexSong === data.length) setIndexSong(1);
+      if (indexSong === data.length) setIndexSong(0);
       const idNext = data[indexSong]?.encodeId;
       handlePlaySong(idNext, data[indexSong]?.streamingStatus, indexSong);
     } else setMounted(true);

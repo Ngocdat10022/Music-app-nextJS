@@ -16,7 +16,7 @@ export const usePlaySong = () => {
   const handlePlaySong = (
     id: string,
     streamingStatus: number,
-    index: number
+    index?: number
   ) => {
     if (!streamingStatus) {
       setCookiesSongId(id);
@@ -26,7 +26,7 @@ export const usePlaySong = () => {
       if (streamingStatus === 1) {
         setCookiesSongId(id);
         setEncodeId(id);
-        setIndexSong(index);
+        index && setIndexSong(index);
         setAutoPlay(true);
       }
       if (streamingStatus === 2) {
