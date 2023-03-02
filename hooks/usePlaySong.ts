@@ -31,8 +31,6 @@ export const usePlaySong = () => {
       }
       if (streamingStatus === 2) {
         toast.error("Không thể phát");
-        setIndexSong(index + 1);
-        // setIndexSong(indexSong + 1);
       }
     }
   };

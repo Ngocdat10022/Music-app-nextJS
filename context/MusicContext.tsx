@@ -119,7 +119,6 @@ export const MusicContextProvider = ({ children }: Props) => {
           if (dataSong.data.err === -1110) {
             toast.error(`${dataSong.data.msg}`);
             setLoadingSong(false);
-            setIndexSong(indexSong + 1);
           }
           if (dataSong.data.data && dataInfoSong.data) {
             const title =
