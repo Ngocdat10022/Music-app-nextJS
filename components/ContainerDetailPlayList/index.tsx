@@ -75,13 +75,17 @@ const DetaiPlayList = ({ data }: { data: any }) => {
             <div className="flex items-center justify-between w-full text-xs header text-text2">
               <div className="media-left w-[50%]">BÀI HÁT</div>
               <div className="media-content max-sm:hidden">ALBUM</div>
-              <div className="media-right max-sm:hidden">THỜI GIAN</div>
             </div>
             <div className="flex flex-col scroll-bar">
               {dataSongs.length > 0 &&
                 dataSongs.map((song, index) => {
                   return (
-                    <SongItem key={song.encodeId} song={song} index={index} />
+                    <SongItem
+                      isbtnDelete={false}
+                      key={song.encodeId}
+                      song={song}
+                      index={index}
+                    />
                   );
                 })}
             </div>

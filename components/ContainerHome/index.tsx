@@ -43,14 +43,14 @@ const ContainerHome = () => {
   return (
     <div>
       <Banner />
-      <Title>{listTitle[1]}</Title>
+      <Title>{listTitle[0]}</Title>
       <List>
         {musicSpring.length &&
           musicSpring.map((item) => {
             return <CardItem key={item.encodeId} item={item} />;
           })}
       </List>
-      <Title>{listTitle[0]}</Title>
+      <Title>{listTitle[1]}</Title>
       <div>
         <div className="flex items-center gap-5">
           {dataNav.map((item) => {
@@ -75,8 +75,8 @@ const ContainerHome = () => {
           })}
         </div>
         <div className="grid grid-cols-3 gap-2 mt-4 max-lg:grid-cols-2 max-sm:grid-cols-1">
-          {allData.length > 0 &&
-            allData.map((songItem, index) => {
+          {allData?.length > 0 &&
+            allData?.map((songItem, index) => {
               return (
                 <SongNewRelesea
                   key={songItem.encodeId}
@@ -87,7 +87,7 @@ const ContainerHome = () => {
             })}
         </div>
       </div>
-      <Title>{listTitle[2]}</Title>
+      <Title>{listTitle[3]}</Title>
       <div className="mt-5">
         <List>
           {artistsTrending.length > 0 &&
@@ -96,7 +96,7 @@ const ContainerHome = () => {
             })}
         </List>
       </div>
-      <Title>{listTitle[3]}</Title>
+      <Title>{listTitle[2]}</Title>
       <div className="mt-5">
         <List>
           {newDayMusic.length > 0 &&

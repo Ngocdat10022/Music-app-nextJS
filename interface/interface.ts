@@ -35,7 +35,7 @@ export interface IMusicChartNewRealesa extends IMsuicSongs {
   releasedAt: number;
 }
 export interface ISongDetailPlayList extends IMsuicSongs {
-  alias: string;
+  alias?: string;
 }
 export interface IMusicArtist {
   alias: string;

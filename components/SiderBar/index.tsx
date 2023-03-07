@@ -67,9 +67,9 @@ const NAV_TWO: Nav[] = [
   },
   {
     id: 8,
-    title: "Nhạc Mới",
+    title: "Yêu Thích",
     icon: <MusicNew />,
-    to: "/",
+    to: "/FavoritesList",
   },
 ];
 const SiderBar = () => {

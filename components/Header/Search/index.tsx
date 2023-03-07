@@ -48,12 +48,7 @@ const Search = () => {
       visible={showTippy}
       onClickOutside={() => handleSetShowTippy()}
       render={(attrs) => (
-        <div
-          className=""
-          aria-expanded="true"
-          // tabIndex="-1"
-          {...attrs}
-        >
+        <div className="" aria-expanded="true" {...attrs}>
           {!debouncedValue ? (
             <PoperWrapper>
               <h4 className="mb-3 text-sm font-bold">Đề xuất cho bạn</h4>

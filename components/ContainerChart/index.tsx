@@ -17,7 +17,14 @@ const ContainerChart = ({
       <div className="mt-4">
         {dataChartNewRealese.length > 0 &&
           dataChartNewRealese.map((song, index) => {
-            return <SongItem key={song.encodeId} song={song} index={index} />;
+            return (
+              <SongItem
+                isbtnDelete={false}
+                key={song.encodeId}
+                song={song}
+                index={index}
+              />
+            );
           })}
       </div>
     </>

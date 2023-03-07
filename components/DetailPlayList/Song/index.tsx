@@ -3,31 +3,37 @@ import React, { useContext, memo } from "react";
 import { ISongDetailPlayList } from "../../../interface/interface";
 import { MusicContext } from "../../../context/MusicContext";
 import { usePlaySong } from "../../../hooks/usePlaySong";
-import { formatTime } from "../../../utils/fomatTime";
 import { getCookiesSongId } from "../../../utils/musicCookie";
 import LoadingSong from "../../LoadingSong";
+import ButtonMusicFavorite from "../../ButtonMusicFavorite";
 const SongItem = ({
   song,
   index,
+  isbtnDelete,
 }: {
   song: ISongDetailPlayList;
   index: number;
+  isbtnDelete?: boolean;
 }) => {
   const { handlePlaySong } = usePlaySong();
   const songId = getCookiesSongId();
-  const { loadingSong } = useContext(MusicContext);
+  const { loadingSong, handleAddPlayList, handleDeletePlayList } =
+    useContext(MusicContext);
+
   return (
     <div
-      onClick={() => {
-        handlePlaySong(song?.encodeId, song?.streamingStatus, index);
-      }}
       key={song.encodeId}
       className={`${
         songId === song?.encodeId ? "active-song" : ""
-      } flex items-center justify-between px-2 transition-all rounded-lg cursor-pointer hover-bg`}
+      } relative flex items-center justify-between px-2 transition-all rounded-lg  hover-bg`}
     >
-      <div className="relative z-10 media-left max-sm:w-full">
-        <div className="relative flex items-center gap-2 p-2 rounded-xl ">
+      <div
+        onClick={() => {
+          handlePlaySong(song?.encodeId, song?.streamingStatus, index);
+        }}
+        className="relative z-10 media-left max-sm:w-full"
+      >
+        <div className="relative flex items-center gap-2 p-2 cursor-pointer rounded-xl">
           <div className="max-sm:hidden relative z-10 w-[50px h-[50px] overflow-hidden rounded-lg">
             <img
               className="z-10 w-[50px h-[50px] "
@@ -53,9 +59,21 @@ const SongItem = ({
       <div className="text-xs media-content music-item-des text-text2 max-sm:hidden">
         {song?.title}
       </div>
-      <div className="media-right text-text2 max-sm:hidden">
-        {formatTime(song?.duration)}
-      </div>
+      {isbtnDelete ? (
+        <ButtonMusicFavorite
+          functionBtn="remove"
+          onClick={() => {
+            handleDeletePlayList(song);
+          }}
+        />
+      ) : (
+        <ButtonMusicFavorite
+          functionBtn="add"
+          onClick={() => {
+            handleAddPlayList(song);
+          }}
+        />
+      )}
     </div>
   );
 };

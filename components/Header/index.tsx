@@ -8,8 +8,6 @@ import Shirt from "../../assets/Icons/Shirt";
 import Search from "./Search";
 import SearchMobile from "./OverlaySearchMobile";
 import useToggleValue from "../../hooks/useToggleValue";
-import Close from "../../assets/Icons/Close";
-import SearchIcon from "../../assets/Icons/SearchIcon";
 const Header = () => {
   const navigateUser: {
     titleTooltip: string;

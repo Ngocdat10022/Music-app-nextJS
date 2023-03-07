@@ -47,6 +47,7 @@ export default function Home({
     useState<IDataMusicSpring[]>(dataNewDayMusic);
   const [conner, setConner] = useState<IDataMusicSpring[]>(dataConner);
   const [dataTitles, setDataTitles] = useState(dataTitle);
+
   return (
     <div className="app">
       <HomeContext.Provider
@@ -72,19 +73,21 @@ export const getStaticProps = async () => {
   ]);
 
   const data = dataHome?.data?.items.filter((item: any) => {
-    return (
-      item?.sectionType === "banner" ||
-      item?.sectionType === "new-release" ||
-      item?.sectionType === "playlist"
-    );
+    return item?.sectionType === "playlist";
   });
   // banner new-release
-  const dataBannerHome = data[0].items;
-  const dataNewRelease = data[1].items;
-  const dataMusicSpring = data[2].items;
-  const dataArtistsTrending = data[3].items;
-  const dataNewDayMusic = data[4].items;
-  const dataConner = data[6].items;
+  const dataBanner = dataHome?.data?.items.filter((item: any) => {
+    return item?.sectionType === "banner";
+  });
+  const dataNewReleaseSv = dataHome?.data?.items.filter((item: any) => {
+    return item?.sectionType === "new-release";
+  });
+  const dataNewRelease = dataNewReleaseSv[0]?.items;
+  const dataBannerHome = dataBanner[0]?.items;
+  const dataMusicSpring = data[0].items;
+  const dataArtistsTrending = data[1].items;
+  const dataNewDayMusic = data[2].items;
+  const dataConner = data[3].items;
 
   const dataTitle = data.filter((itemTitle: any) => {
     return itemTitle.title;

@@ -125,9 +125,7 @@
     background: rgba(0, 0, 0, 0.9);
     padding-right: 50px;
   }
-  .hover-bg:hover {
-    background: rgb(92, 77, 113);
-  }
+
   .active-song {
     background: rgb(92, 77, 113);
   }
@@ -174,6 +172,17 @@
   /* 
     Meida style 
   */
+  .hover-bg:hover {
+    background: rgb(92, 77, 113);
+  }
+  .hover-bg:hover .btn {
+    display: flex;
+  }
+  .hover-bg {
+    .btn {
+      display: none;
+    }
+  }
   .media-left {
     width: 50%;
   }

@@ -1,10 +1,17 @@
 import React, { useState, createContext, useEffect, useContext } from "react";
 import UseDebounce from "../hooks/useDebounce";
 import { getInfoSong, getSearch, getTheSong } from "../service/api";
-import { IInfoSong, IMsuicSongs, IMusicArtist } from "../interface/interface";
+import {
+  IInfoSong,
+  IMsuicSongs,
+  IMusicArtist,
+  ISongDetailPlayList,
+} from "../interface/interface";
 import { useLoading } from "../hooks/useLoading";
 import { toast } from "react-toastify";
-import { usePlaySong } from "../hooks/usePlaySong";
+import { useLocalStorage } from "../hooks/useLocalStorage";
+import Swal from "sweetalert2";
+
 interface Props {
   children: React.ReactNode;
 }
@@ -31,6 +38,9 @@ interface IMusicContext {
   indexSong: number;
   setIndexSong: React.Dispatch<React.SetStateAction<number>>;
   NextMusixEffect?: () => void;
+  handleAddPlayList: (song: ISongDetailPlayList) => void;
+  handleDeletePlayList: (song: ISongDetailPlayList) => void;
+  dataSongFavorite: ISongDetailPlayList[];
 }
 const MusicDefaultData = {
   songs: [],
@@ -55,9 +65,18 @@ const MusicDefaultData = {
   indexSong: 0,
   setIndexSong: () => {},
   NextMusixEffect: () => {},
+  handleAddPlayList: () => {},
+  handleDeletePlayList: () => {},
+  dataSongFavorite: [],
 };
 export const MusicContext = createContext<IMusicContext>(MusicDefaultData);
 export const MusicContextProvider = ({ children }: Props) => {
+  const NEXT_PUBLIC_MUSIC_FAVORITE_KEY = process.env.NEXT_PUBLIC_MUSIC_FAVORITE;
+  const [storedValue, setValue] = useLocalStorage(
+    `${NEXT_PUBLIC_MUSIC_FAVORITE_KEY}`,
+    []
+  );
+
   const [searchValue, setSearchValue] = useState<string>(
     MusicDefaultData.searchValue
   );
@@ -71,6 +90,8 @@ export const MusicContextProvider = ({ children }: Props) => {
   const [indexSong, setIndexSong] = useState<number>(
     MusicDefaultData.indexSong
   );
+  const [dataSongFavorite] = useState<ISongDetailPlayList[]>(storedValue);
+
   const { loading: loadingSearch, setLoading: setLoadingSearch } =
     useLoading(false);
   const { loading: loadingSong, setLoading: setLoadingSong } =
@@ -97,15 +118,6 @@ export const MusicContextProvider = ({ children }: Props) => {
     fetchSongSearch();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debouncedValue]);
-  const NextMusixEffect = (data: any) => {
-    const { indexSong, setIndexSong } = useContext(MusicContext);
-    const { handlePlaySong } = usePlaySong();
-    useEffect(() => {
-      if (indexSong === data.length) setIndexSong(1);
-      const idNext = data[indexSong]?.encodeId;
-      handlePlaySong(idNext, data[indexSong]?.streamingStatus, indexSong);
-    }, [indexSong]);
-  };
 
   useEffect(() => {
     const fetchSong = async () => {
@@ -145,6 +157,43 @@ export const MusicContextProvider = ({ children }: Props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [encodeId]);
 
+  const handleAddPlayList = (song: ISongDetailPlayList) => {
+    const isSong = storedValue.find(
+      (item: ISongDetailPlayList) => item?.encodeId === song?.encodeId
+    );
+
+    if (isSong) {
+      toast.warning("Bài hát đã được thêm vào PlayList");
+    } else {
+      toast.success("Thêm thành công");
+      setValue((prev: ISongDetailPlayList[]) => [...prev, song]);
+    }
+  };
+  const handleDeletePlayList = (song: ISongDetailPlayList) => {
+    const newData = storedValue.filter((item: ISongDetailPlayList) => {
+      return song?.encodeId !== item?.encodeId;
+    });
+    Swal.fire({
+      title: "Bạn có muốn xoá bài hát?",
+      background: "#34224f",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#9b4de0",
+      cancelButtonColor: "#9b4de0",
+      cancelButtonText: "Bỏ Qua",
+      confirmButtonText: "xoá",
+      showClass: {
+        popup: "animate__animated animate__fadeInDown",
+      },
+      hideClass: {
+        popup: "animate__animated animate__fadeOutUp",
+      },
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        setValue(newData);
+      }
+    });
+  };
   return (
     <MusicContext.Provider
       value={{
@@ -169,6 +218,9 @@ export const MusicContextProvider = ({ children }: Props) => {
         setLoadingSong,
         indexSong,
         setIndexSong,
+        handleAddPlayList,
+        handleDeletePlayList,
+        dataSongFavorite,
       }}
     >
       {children}
