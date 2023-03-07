@@ -163,9 +163,9 @@ export const MusicContextProvider = ({ children }: Props) => {
     );
 
     if (isSong) {
-      toast.warning("Bài hát đã được thêm vào PlayList");
+      toast.warning("Bài hát đã tồn tại trong Favorite playlist");
     } else {
-      toast.success("Thêm thành công");
+      toast.success("Bài hát đã được thêm vào Favorite playlist");
       setValue((prev: ISongDetailPlayList[]) => [...prev, song]);
     }
   };
