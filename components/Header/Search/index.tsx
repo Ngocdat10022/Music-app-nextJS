@@ -64,7 +64,6 @@ const Search = () => {
                   </li>
                 ))}
               </div>
-              {/* <Searchresult /> */}
             </PoperWrapper>
           ) : (
             <PoperWrapper>

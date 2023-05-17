@@ -41,6 +41,7 @@ interface IMusicContext {
   handleAddPlayList: (song: ISongDetailPlayList) => void;
   handleDeletePlayList: (song: ISongDetailPlayList) => void;
   dataSongFavorite: ISongDetailPlayList[];
+  musicPlayList: IMsuicSongs[];
 }
 const MusicDefaultData = {
   songs: [],
@@ -68,6 +69,7 @@ const MusicDefaultData = {
   handleAddPlayList: () => {},
   handleDeletePlayList: () => {},
   dataSongFavorite: [],
+  musicPlayList: [],
 };
 export const MusicContext = createContext<IMusicContext>(MusicDefaultData);
 export const MusicContextProvider = ({ children }: Props) => {
@@ -76,7 +78,7 @@ export const MusicContextProvider = ({ children }: Props) => {
     `${NEXT_PUBLIC_MUSIC_FAVORITE_KEY}`,
     []
   );
-
+  const [musicPlayList, setMusicPlayList] = useState(storedValue);
   const [searchValue, setSearchValue] = useState<string>(
     MusicDefaultData.searchValue
   );
@@ -194,6 +196,10 @@ export const MusicContextProvider = ({ children }: Props) => {
       }
     });
   };
+
+  useEffect(() => {
+    setMusicPlayList(storedValue);
+  }, [storedValue]);
   return (
     <MusicContext.Provider
       value={{
@@ -221,6 +227,7 @@ export const MusicContextProvider = ({ children }: Props) => {
         handleAddPlayList,
         handleDeletePlayList,
         dataSongFavorite,
+        musicPlayList,
       }}
     >
       {children}
